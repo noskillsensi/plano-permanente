@@ -24,13 +24,40 @@
         .card { background-color: #1E1E1E; border: 1px solid #333; border-radius: 0.75rem; padding: 1.25rem; margin-bottom: 1.5rem; }
         
         /* --- NOVO CRONÔMETRO --- */
-        .timer-bar { background-color: #E53935; text-align: center; padding: 0.75rem 1rem; display: flex; align-items: center; justify-content: center; gap: 1rem; }
+        .timer-bar { 
+            background-color: #E53935; 
+            text-align: center; 
+            padding: 0.75rem 1rem; 
+            display: flex; 
+            align-items: center; /* Alinha itens verticalmente ao centro */
+            justify-content: center; 
+            gap: 1rem; 
+        }
         .timer-bar-icon img { height: 40px; width: 40px; }
-        .timer-display { font-family: 'Teko', sans-serif; font-size: 2.25rem; font-weight: 700; color: #FFF; line-height: 1; }
-        .timer-description { font-size: 0.8rem; font-weight: 700; color: rgba(255,255,255,0.85); text-transform: uppercase; line-height: 1.2; text-align: left;}
+        .timer-content { /* Novo wrapper para o texto e timer */
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start; /* Alinha o texto à esquerda dentro do seu wrapper */
+            justify-content: center;
+        }
+        .timer-display { 
+            font-family: 'Teko', sans-serif; 
+            font-size: 2.25rem; 
+            font-weight: 700; 
+            color: #FFF; 
+            line-height: 1; 
+            text-align: left; /* Garante que o timer esteja alinhado com a descrição */
+        }
+        .timer-description { 
+            font-size: 0.8rem; 
+            font-weight: 700; 
+            color: rgba(255,255,255,0.85); 
+            text-transform: uppercase; 
+            line-height: 1.2; 
+            text-align: left; /* Alinhamento central removido, agora à esquerda */
+        }
 
         /* --- TIPOGRAFIA --- */
-        h1.main-title { font-family: 'Teko', sans-serif; text-transform: uppercase; font-size: 2.25rem; letter-spacing: 0.05em; text-align: center; margin-bottom: 1.5rem; }
         h2.card-title { font-family: 'Teko', sans-serif; text-transform: uppercase; font-size: 1.5rem; margin-bottom: 1.5rem; display: flex; align-items: center; }
         h3.nested-title { font-weight: 700; font-size: 1.25rem; margin-bottom: 1rem; text-align: center; }
 
@@ -93,7 +120,7 @@
         <div class="timer-bar-icon">
             <img src="https://i.ibb.co/TBzF651Q/clock-svgrepo-com.png" alt="Relógio">
         </div>
-        <div>
+        <div class="timer-content">
             <div id="timer" class="timer-display">15:00</div>
             <div class="timer-description">Seu Acesso VIP com desconto expira em:</div>
         </div>
@@ -102,8 +129,6 @@
     <div class="container">
         <img src="https://i.ibb.co/3yb2yj9z/JkOe9ya.png" alt="Banner 50% Desconto" class="banner">
         
-        <h1 class="main-title">Compra Segura</h1>
-
         <div id="checkout-form-container">
             <div class="card">
                 <h2 class="card-title">Resumo do Pedido</h2>
@@ -317,9 +342,10 @@
                 if (timeInSeconds <= 0) {
                     clearInterval(countdown);
                     if(timerBar) {
-                        timerBar.innerHTML = "OFERTA ENCERRADA";
+                        timerBar.innerHTML = "<div style='text-align: center; width: 100%;'>OFERTA ENCERRADA</div>"; // Centraliza o texto
                         timerBar.style.fontSize = "1.2rem";
                         timerBar.style.padding = "1.25rem";
+                        timerBar.style.justifyContent = "center"; // Centraliza o conteúdo inteiro
                     }
                     submitButton.disabled = true;
                     submitButton.style.opacity = '0.5';
