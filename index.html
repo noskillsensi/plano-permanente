@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Compra Segura - Noskill Sensi</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Teko:wght@400;700&family=Poppins:wght@400;700&display=swap');
@@ -23,8 +22,13 @@
         /* --- ESTRUTURA E LAYOUT --- */
         .container { max-width: 470px; margin: 0 auto; padding: 0 1rem 1rem 1rem; }
         .card { background-color: #1E1E1E; border: 1px solid #333; border-radius: 0.75rem; padding: 1.25rem; margin-bottom: 1.5rem; }
-        .static-bar { background-color: #E53935; text-align: center; padding: 0.75rem; font-weight: 700; display: flex; align-items: center; justify-content: center; gap: 0.5rem; }
         
+        /* --- NOVO CRONÔMETRO --- */
+        .timer-bar { background-color: #E53935; text-align: center; padding: 0.75rem 1rem; display: flex; align-items: center; justify-content: center; gap: 1rem; }
+        .timer-bar-icon img { height: 40px; width: 40px; }
+        .timer-display { font-family: 'Teko', sans-serif; font-size: 2.25rem; font-weight: 700; color: #FFF; line-height: 1; }
+        .timer-description { font-size: 0.8rem; font-weight: 700; color: rgba(255,255,255,0.85); text-transform: uppercase; line-height: 1.2; text-align: left;}
+
         /* --- TIPOGRAFIA --- */
         h1.main-title { font-family: 'Teko', sans-serif; text-transform: uppercase; font-size: 2.25rem; letter-spacing: 0.05em; text-align: center; margin-bottom: 1.5rem; }
         h2.card-title { font-family: 'Teko', sans-serif; text-transform: uppercase; font-size: 1.5rem; margin-bottom: 1.5rem; display: flex; align-items: center; }
@@ -34,7 +38,7 @@
         .banner { width: 100%; border-radius: 0.5rem; margin: 1rem 0 1.5rem 0; }
         .form-input { background-color: #2A2A2A; border: 1px solid #4B4B4B; color: #FFF; width: 100%; padding: 0.75rem 1rem; border-radius: 0.5rem; }
         .form-input:focus { outline: none; border-color: #E53935; box-shadow: 0 0 0 2px rgba(229, 57, 53, 0.5); }
-        .input-description { font-size: 0.75rem; color: #9ca3af; margin-bottom: 0.75rem; font-weight: 400; } /* <-- ESPAÇAMENTO AJUSTADO */
+        .input-description { font-size: 0.75rem; color: #9ca3af; margin-bottom: 0.75rem; font-weight: 400; }
         .btn-cta { background-color: #E53935; transition: background-color 0.3s ease; width: 100%; color: #FFF; font-family: 'Teko', sans-serif; font-size: 1.6rem; font-weight: 700; padding: 0.75rem; border-radius: 0.5rem; display: flex; align-items: center; justify-content: center; gap: 0.5rem; letter-spacing: 0.05em; }
         .btn-cta:hover { background-color: #C62828; }
         #loading-spinner { display: none; width: 1.5rem; height: 1.5rem; border: 3px solid rgba(255,255,255,0.3); border-top-color: #FFF; border-radius: 50%; animation: spin 1s linear infinite; }
@@ -49,14 +53,9 @@
         .step-number { display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; background-color: #E53935; border-radius: 50%; color: #FFF; font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 1rem; margin-right: 0.75rem; line-height: 1; }
         .nested-card { background-color: #2A2A2A; border-radius: 0.5rem; padding: 1.25rem; border: 1px solid #404040; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
         
-        /* --- SEÇÃO IDENTIFICAÇÃO AJUSTADA --- */
-        .identification-field { margin-bottom: 1.5rem; } /* <-- ESPAÇAMENTO AJUSTADO */
-        .identification-field:last-of-type { margin-bottom: 0; }
-        .identification-field label { font-size: 0.95rem; font-weight: 700; margin-bottom: 0.75rem; display: block; } /* <-- FONTE E ESPAÇAMENTO AJUSTADOS */
-
         /* --- SEÇÃO PAGAMENTO --- */
         .payment-selector { display: flex; align-items: center; gap: 0.75rem; background-color: #2A2A2A; border: 2px solid #E53935; border-radius: 0.5rem; padding: 1rem; font-weight: 700; font-size: 1.125rem; margin-bottom: 1.5rem; }
-        .payment-selector img { height: 28px; width: auto; } /* <-- ÍCONE PIX AGORA É IMG NOVAMENTE */
+        .payment-selector img { height: 28px; width: auto; }
         .pix-action-box .benefits { display: flex; flex-direction: column; gap: 1rem; }
         .pix-action-box .benefit-item { display: flex; align-items: center; gap: 1rem; padding-bottom: 1rem; border-bottom: 1px solid #3c3c3c; }
         .pix-action-box .benefit-item:last-child { border-bottom: none; padding-bottom: 0; }
@@ -66,6 +65,10 @@
         .pix-action-box .total-box { display: flex; justify-content: space-between; align-items: center; margin: 1.5rem 0; font-weight: 700; font-size: 1.125rem; }
         .pix-action-box .total-box .price { color: #22c55e; font-size: 1.25rem; }
 
+        /* --- SEÇÃO IDENTIFICAÇÃO --- */
+        .identification-field { margin-bottom: 1.5rem; }
+        .identification-field:last-of-type { margin-bottom: 0; }
+        .identification-field label { font-size: 0.95rem; font-weight: 700; margin-bottom: 0.75rem; display: block; }
         .feedback { display: flex; flex-direction: column; gap: 1rem; }
         .feedback-item .header { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.5rem;}
         .feedback-item img { width: 40px; height: 40px; border-radius: 50%; }
@@ -86,9 +89,14 @@
 </head>
 <body>
 
-    <div class="static-bar">
-        <i class="fa-regular fa-clock"></i>
-        <span>Seu Acesso VIP com desconto expira em: <span id="timer">15:00</span></span>
+    <div class="timer-bar" id="timer-bar">
+        <div class="timer-bar-icon">
+            <img src="https://i.ibb.co/TBzF651Q/clock-svgrepo-com.png" alt="Relógio">
+        </div>
+        <div>
+            <div id="timer" class="timer-display">15:00</div>
+            <div class="timer-description">Seu Acesso VIP com desconto expira em:</div>
+        </div>
     </div>
 
     <div class="container">
@@ -247,6 +255,7 @@
             const pixModal = document.getElementById('pix-modal');
             const closeModalButton = document.getElementById('close-modal-button');
             const timerDisplay = document.getElementById('timer');
+            const timerBar = document.getElementById('timer-bar');
             const pixQrcodeImg = document.getElementById('pix-qrcode');
             
             // CONFIGURAÇÃO
@@ -307,7 +316,11 @@
 
                 if (timeInSeconds <= 0) {
                     clearInterval(countdown);
-                    if(timerDisplay) timerDisplay.parentElement.innerHTML = "OFERTA ENCERRADA";
+                    if(timerBar) {
+                        timerBar.innerHTML = "OFERTA ENCERRADA";
+                        timerBar.style.fontSize = "1.2rem";
+                        timerBar.style.padding = "1.25rem";
+                    }
                     submitButton.disabled = true;
                     submitButton.style.opacity = '0.5';
                     submitButton.style.cursor = 'not-allowed';
