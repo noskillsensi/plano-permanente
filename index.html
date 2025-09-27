@@ -10,7 +10,7 @@
         
         /* --- ESTILOS GERAIS E RESET --- */
         *,:after,:before{box-sizing:border-box;border:0 solid #e5e7eb}
-        html{line-height:1.5;-webkit-text-size-adjust:100%;tab-size:4;font-family:'Poppins',sans-serif}
+        html{line-height:1.5;-webkit-text-size-adjust:100%;tab-size:4;font-family:'Poppins',sans-serif; scroll-behavior: smooth;}
         body{margin:0;line-height:inherit;background-color:#121212;color:#FFF}
         h1,h2,h3,p,ul,li{margin:0; padding:0; line-height: 1.4;}
         img{display:block;vertical-align:middle;max-width:100%;height:auto}
@@ -111,81 +111,79 @@
     <div class="container">
         <img src="https://i.ibb.co/3yb2yj9z/JkOe9ya.png" alt="Banner 50% Desconto" class="banner">
         
-        <div id="main-content">
-            <div id="checkout-form-container">
-                <div class="card">
-                    <h2 class="card-title">Resumo do Pedido</h2>
-                    <div class="order-summary">
-                        <img src="https://i.ibb.co/dwmcHL3T/aOplo9H.png" alt="Logo Noskill Sensi">
-                        <div>
-                            <p style="font-weight: 700; font-size: 1.125rem;">Aplicativo Noskill</p>
-                            <p class="pix-info">Pagamento via PIX</p>
-                            <div class="price-anchor">
-                                <span class="original">R$ 29,97</span>
-                                <p class="current">R$ 14,97</p>
-                            </div>
+        <div id="checkout-content">
+            <div class="card">
+                <h2 class="card-title">Resumo do Pedido</h2>
+                <div class="order-summary">
+                    <img src="https://i.ibb.co/dwmcHL3T/aOplo9H.png" alt="Logo Noskill Sensi">
+                    <div>
+                        <p style="font-weight: 700; font-size: 1.125rem;">Aplicativo Noskill</p>
+                        <p class="pix-info">Pagamento via PIX</p>
+                        <div class="price-anchor">
+                            <span class="original">R$ 29,97</span>
+                            <p class="current">R$ 14,97</p>
                         </div>
                     </div>
                 </div>
-
-                <form id="checkout-form">
-                    <div class="card">
-                        <h2 class="card-title"><span class="step-number">1</span>Identificação</h2>
-                        <div class="identification-field">
-                            <label for="name">Nome Completo:</label>
-                            <input type="text" id="name" name="name" class="form-input" placeholder="Digite seu nome completo" required>
-                        </div>
-                        <div class="identification-field" style="margin-bottom: 0;"> 
-                            <label for="email">E-mail:</label>
-                            <p class="input-description">Esse e-mail receberá o produto.</p>
-                            <input type="email" id="email" name="email" class="form-input" placeholder="Digite seu melhor e-mail" required>
-                        </div>
-                    </div>
-                    
-                    <div class="card">
-                        <h2 class="card-title"><span class="step-number">2</span>Pagamento</h2>
-                        <div class="payment-selector">
-                            <img src="https://i.ibb.co/xqGv4ksH/pix-svgrepo-com-1.png" alt="Ícone PIX">
-                            <span>PIX</span>
-                        </div>
-                        <div class="pix-action-box nested-card">
-                            <h3 class="nested-title">Pague com PIX</h3>
-                            <div class="benefits">
-                                <div class="benefit-item">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                                    <div class="benefit-text">
-                                        <strong>Transferência Instantânea</strong><br>
-                                        <span>Sua compra é confirmada em segundos, sem esperas.</span>
-                                    </div>
-                                </div>
-                                <div class="benefit-item">
-                                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 4.875c0-.621.504-1.125 1.125-1.125h4.5c.621 0 1.125.504 1.125 1.125v4.5c0 .621-.504 1.125-1.125 1.125h-4.5A1.125 1.125 0 013.75 9.375v-4.5zM3.75 14.625c0-.621.504-1.125 1.125-1.125h4.5c.621 0 1.125.504 1.125 1.125v4.5c0 .621-.504 1.125-1.125 1.125h-4.5a1.125 1.125 0 01-1.125-1.125v-4.5zM13.5 4.875c0-.621.504-1.125 1.125-1.125h4.5c.621 0 1.125.504 1.125 1.125v4.5c0 .621-.504 1.125-1.125 1.125h-4.5A1.125 1.125 0 0113.5 9.375v-4.5zM13.5 14.625c0-.621.504-1.125 1.125-1.125h4.5c.621 0 1.125.504 1.125 1.125v4.5c0 .621-.504 1.125-1.125 1.125h-4.5a1.125 1.125 0 01-1.125-1.125v-4.5z" /></svg>
-                                    <div class="benefit-text">
-                                        <strong>Praticidade Máxima</strong><br>
-                                        <span>Escaneie o QR code ou copie o código PIX. Pronto!</span>
-                                    </div>
-                                </div>
-                                 <div class="benefit-item">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.286zm0 13.036h.008v.008h-.008v-.008z" /></svg>
-                                    <div class="benefit-text">
-                                        <strong>Segurança Garantida</strong><br>
-                                        <span>Tecnologia do Banco Central para sua tranquilidade.</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <hr style="margin: 1.5rem 0;">
-                            <div class="total-box">
-                                <span>Total a pagar:</span>
-                                <span class="price">R$ 14,97</span>
-                            </div>
-                            <button type="submit" id="submit-button" class="btn-cta">
-                                <span id="button-text">ATIVAR MODO CAPUDO!</span>
-                                <div id="loading-spinner"></div>
-                            </button>
-                        </div>
-                    </div>
-                </form>
             </div>
+
+            <form id="checkout-form">
+                <div class="card">
+                    <h2 class="card-title"><span class="step-number">1</span>Identificação</h2>
+                    <div class="identification-field">
+                        <label for="name">Nome Completo:</label>
+                        <input type="text" id="name" name="name" class="form-input" placeholder="Digite seu nome completo" required>
+                    </div>
+                    <div class="identification-field" style="margin-bottom: 0;"> 
+                        <label for="email">E-mail:</label>
+                        <p class="input-description">Esse e-mail receberá o produto.</p>
+                        <input type="email" id="email" name="email" class="form-input" placeholder="Digite seu melhor e-mail" required>
+                    </div>
+                </div>
+                
+                <div class="card" id="payment-step-card">
+                    <h2 class="card-title"><span class="step-number">2</span>Pagamento</h2>
+                    <div class="payment-selector">
+                        <img src="https://i.ibb.co/xqGv4ksH/pix-svgrepo-com-1.png" alt="Ícone PIX">
+                        <span>PIX</span>
+                    </div>
+                    <div class="pix-action-box nested-card">
+                        <h3 class="nested-title">Pague com PIX</h3>
+                        <div class="benefits">
+                            <div class="benefit-item">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                                <div class="benefit-text">
+                                    <strong>Transferência Instantânea</strong><br>
+                                    <span>Sua compra é confirmada em segundos, sem esperas.</span>
+                                </div>
+                            </div>
+                            <div class="benefit-item">
+                               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 4.875c0-.621.504-1.125 1.125-1.125h4.5c.621 0 1.125.504 1.125 1.125v4.5c0 .621-.504 1.125-1.125 1.125h-4.5A1.125 1.125 0 013.75 9.375v-4.5zM3.75 14.625c0-.621.504-1.125 1.125-1.125h4.5c.621 0 1.125.504 1.125 1.125v4.5c0 .621-.504 1.125-1.125 1.125h-4.5a1.125 1.125 0 01-1.125-1.125v-4.5zM13.5 4.875c0-.621.504-1.125 1.125-1.125h4.5c.621 0 1.125.504 1.125 1.125v4.5c0 .621-.504 1.125-1.125 1.125h-4.5A1.125 1.125 0 0113.5 9.375v-4.5zM13.5 14.625c0-.621.504-1.125 1.125-1.125h4.5c.621 0 1.125.504 1.125 1.125v4.5c0 .621-.504 1.125-1.125 1.125h-4.5a1.125 1.125 0 01-1.125-1.125v-4.5z" /></svg>
+                                <div class="benefit-text">
+                                    <strong>Praticidade Máxima</strong><br>
+                                    <span>Escaneie o QR code ou copie o código PIX. Pronto!</span>
+                                </div>
+                            </div>
+                             <div class="benefit-item">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.286zm0 13.036h.008v.008h-.008v-.008z" /></svg>
+                                <div class="benefit-text">
+                                    <strong>Segurança Garantida</strong><br>
+                                    <span>Tecnologia do Banco Central para sua tranquilidade.</span>
+                                </div>
+                            </div>
+                        </div>
+                        <hr style="margin: 1.5rem 0;">
+                        <div class="total-box">
+                            <span>Total a pagar:</span>
+                            <span class="price">R$ 14,97</span>
+                        </div>
+                        <button type="submit" id="submit-button" class="btn-cta">
+                            <span id="button-text">ATIVAR MODO CAPUDO!</span>
+                            <div id="loading-spinner"></div>
+                        </button>
+                    </div>
+                </div>
+            </form>
 
             <div id="pix-container" class="card hidden text-center">
                 <h2 class="pix-title">Pague com PIX para Ativar</h2>
@@ -211,7 +209,7 @@
                             <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
                         </div>
                     </div>
-                    <p class="content">"Pensei que ia ser mó trampo pra instalar..."</p>
+                    <p class="content">"Pensei que ia ser mó trampo pra instalar, chegou o link no e-mail, instalei e já era. Em 2 minutos eu já tava amassando na rank, bglh simples e direto"</p>
                 </div>
                 <div class="feedback-item nested-card">
                      <div class="header">
@@ -221,7 +219,7 @@
                             <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
                         </div>
                     </div>
-                    <p class="content">"pprt depois que instalei parece que tô xitado..."</p>
+                    <p class="content">"pprt depois que instalei parece que tô xitado kkkk a mira não pina mais, só vermelho. A 2x automática é a mais gostosa do jogo, podem comprar sem medo"</p>
                 </div>
                 <div class="feedback-item nested-card">
                      <div class="header">
@@ -231,7 +229,7 @@
                             <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
                         </div>
                     </div>
-                    <p class="content">"O mais foda é que o app tá sempre atualizado..."</p>
+                    <p class="content">"O mais foda é que o app tá sempre atualizado pra nova temporada. Comprei o vitalício e não me preocupo mais. As funções é só ligar e pronto, a mágica acontece confia"</p>
                 </div>
             </div>
         </div>
@@ -258,10 +256,9 @@
     
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const checkoutFormContainer = document.getElementById('checkout-form-container');
-            const pixContainer = document.getElementById('pix-container');
-            const mainContent = document.getElementById('main-content');
             const checkoutForm = document.getElementById('checkout-form');
+            const paymentStepCard = document.getElementById('payment-step-card');
+            const pixContainer = document.getElementById('pix-container');
             const submitButton = document.getElementById('submit-button');
             const buttonText = document.getElementById('button-text');
             const loadingSpinner = document.getElementById('loading-spinner');
@@ -288,12 +285,10 @@
                 pixQrcode.src = `data:image/png;base64,${qrcodeBase64}`;
                 pixCopyPaste.value = pixCopiaECola;
                 
-                // Esconde o formulário e exibe o container do PIX
-                checkoutFormContainer.classList.add('hidden');
+                paymentStepCard.classList.add('hidden');
                 pixContainer.classList.remove('hidden');
 
-                // Garante que a página role para o topo para ver o QR Code
-                mainContent.scrollIntoView({ behavior: 'smooth' });
+                pixContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
             }
 
             checkoutForm.addEventListener('submit', async (e) => {
