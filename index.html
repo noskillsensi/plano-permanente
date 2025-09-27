@@ -18,7 +18,6 @@
         .btn-secondary:hover { background-color: #2D3748; }
         #loading-spinner { border-top-color: #1DB954; animation: spin 1s linear infinite; }
         @keyframes spin { to { transform: rotate(360deg); } }
-        /* CORREÇÃO: Garante que a logo não seja achatada */
         .product-logo { object-fit: contain; }
     </style>
 </head>
@@ -31,7 +30,7 @@
     <div class="w-full max-w-md bg-[#181818] p-4 sm:p-8 min-h-screen sm:min-h-0 sm:rounded-2xl sm:shadow-2xl sm:my-8">
         
         <div class="mb-6">
-            <img src="https://i.ibb.co/L842S0b/banner-50.png" alt="Banner 50% Desconto" class="w-full rounded-lg"/>
+            <img src="https://i.ibb.co/T03Tf5x/banner-50.png" alt="Banner 50% Desconto" class="w-full rounded-lg"/>
         </div>
 
         <div class="flex items-center gap-4 mb-6 bg-[#1E1E1E] p-4 rounded-lg border border-gray-700">
@@ -69,17 +68,46 @@
             </form>
         </div>
 
-        <div id="pix-container" class="hidden text-center bg-[#1E1E1E] p-6 rounded-lg border border-gray-700">
-            <h2 class="font-teko text-3xl font-bold text-white uppercase mb-2">Pague com PIX para ativar</h2>
-            <p class="text-gray-400 mb-4">Escaneie o QR Code ou use o Copia e Cola.</p>
-            <img id="pix-qrcode" src="" alt="PIX QR Code" class="mx-auto w-56 h-56 bg-white p-2 rounded-lg mb-4 border-4 border-green-500">
-            <div class="bg-black/30 p-3 rounded-lg">
-                <textarea id="pix-copy-paste" class="w-full bg-transparent text-gray-300 text-xs border-none focus:outline-none resize-none" rows="3" readonly></textarea>
+        <div id="pix-container" class="hidden space-y-6">
+            <div class="bg-[#1E1E1E] p-6 rounded-lg border border-gray-700">
+                <div class="flex items-center gap-4 p-3 rounded-lg border border-green-500/50 bg-green-500/10 mb-6">
+                    <i class="fa-brands fa-pix text-3xl text-green-400"></i>
+                    <p class="font-bold text-lg text-white">Pagamento via PIX</p>
+                </div>
+                
+                <div class="space-y-4 text-gray-300">
+                    <div class="flex items-start gap-4">
+                        <i class="fas fa-clock text-green-400 w-5 text-center pt-1"></i>
+                        <div>
+                            <h3 class="font-bold text-white">Transferência Instantânea</h3>
+                            <p class="text-sm">Sua compra é confirmada em segundos, sem esperas.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-4">
+                        <i class="fas fa-qrcode text-green-400 w-5 text-center pt-1"></i>
+                        <div>
+                            <h3 class="font-bold text-white">Praticidade Máxima</h3>
+                            <p class="text-sm">Escaneie o QR code ou copie o código PIX. Pronto!</p>
+                        </div>
+                    </div>
+                     <div class="flex items-start gap-4">
+                        <i class="fas fa-shield-halved text-green-400 w-5 text-center pt-1"></i>
+                        <div>
+                            <h3 class="font-bold text-white">Segurança Garantida</h3>
+                            <p class="text-sm">Tecnologia do Banco Central para sua tranquilidade.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="border-t border-gray-700 my-6"></div>
+
+                <img id="pix-qrcode" src="" alt="PIX QR Code" class="mx-auto w-56 h-56 bg-white p-2 rounded-lg mb-4">
+                <textarea id="pix-copy-paste" class="w-full bg-black/30 p-3 rounded-lg text-gray-300 text-xs border border-gray-700 focus:outline-none resize-none" rows="3" readonly></textarea>
+                <button id="copy-button" class="w-full mt-4 btn-secondary text-white font-bold py-3 px-4 rounded-lg">
+                    <i class="fas fa-copy mr-2"></i> Copiar Código PIX
+                </button>
+                 <p class="text-sm text-yellow-400 text-center mt-6 animate-pulse">Aguardando pagamento...</p>
             </div>
-            <button id="copy-button" class="w-full mt-4 btn-secondary text-white font-bold py-3 px-4 rounded-lg">
-                <i class="fas fa-copy mr-2"></i> Copiar Código PIX
-            </button>
-            <p class="text-sm text-yellow-400 mt-6 animate-pulse">Aguardando pagamento...</p>
         </div>
         
         <div class="mt-6 bg-[#1E1E1E] p-6 rounded-lg border border-gray-700 space-y-6">
@@ -89,9 +117,7 @@
                     <img src="https://i.ibb.co/JFbX4Rng/vini.png" alt="Avatar Vini" class="w-10 h-10 rounded-full mr-3">
                     <div>
                         <p class="font-bold text-white">Vini</p>
-                        <div class="text-yellow-400">
-                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-                        </div>
+                        <div class="text-yellow-400"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
                     </div>
                 </div>
                 <p class="text-gray-300">"Pensei que ia ser mó trampo pra instalar, chegou o link no e-mail, instalei e já era. Em 2 minutos eu já tava amassando na rank, bglh simples e direto"</p>
@@ -101,9 +127,7 @@
                     <img src="https://i.ibb.co/1fygsR5c/gabriel.png" alt="Avatar Gabrielxs" class="w-10 h-10 rounded-full mr-3">
                     <div>
                         <p class="font-bold text-white">Gabrielxs</p>
-                        <div class="text-yellow-400">
-                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-                        </div>
+                        <div class="text-yellow-400"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
                     </div>
                 </div>
                 <p class="text-gray-300">"pprt depois que instalei parece que tô xitado kkkk a mira não pina mais, só vermelho. A 2x automática é a mais gostosa do jogo, podem comprar sem medo"</p>
@@ -113,9 +137,7 @@
                     <img src="https://i.ibb.co/7JjBMPZH/lipe2x.png" alt="Avatar Lipe2x" class="w-10 h-10 rounded-full mr-3">
                     <div>
                         <p class="font-bold text-white">Lipe2x</p>
-                        <div class="text-yellow-400">
-                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-                        </div>
+                        <div class="text-yellow-400"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
                     </div>
                 </div>
                 <p class="text-gray-300">"O mais foda é que o app tá sempre atualizado pra nova temporada. Comprei o vitalício e não me preocupo mais. As funções é só ligar e pronto, a mágica acontece confia"</p>
