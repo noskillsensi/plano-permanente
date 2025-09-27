@@ -1,34 +1,50 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Compra Segura - Noskill Sensi</title>
-    
-    <script>
-      window.pixelId = "687c11e3a04e4348ef2a8d8d";
-      var a = document.createElement("script");
-      a.setAttribute("async", "");
-      a.setAttribute("defer", "");
-      a.setAttribute("src", "https://cdn.utmify.com.br/scripts/pixel/pixel.js");
-      document.head.appendChild(a);
-      
-      // Nova função para esperar o pixel carregar
-      function trackEvent(eventName, eventData) {
-          const checkUtmify = setInterval(() => {
-              if (window.utmify) {
-                  window.utmify.track(eventName, eventData);
-                  console.log(`UTMify: ${eventName} acionado.`);
-                  clearInterval(checkUtmify);
-              }
-          }, 100); // Tenta a cada 100ms
-      }
+  <!-- Define o pixel ID antes do script -->
+  <script>
+    window.pixelId = "687c11e3a04e4348ef2a8d8d";
+  </script>
+  <script async defer src="https://cdn.utmify.com.br/scripts/pixel/pixel.js"></script>
 
-      // Aciona o evento "iniciar checkout" ao carregar a página
-      window.addEventListener('load', () => {
-          trackEvent('InitiateCheckout');
-      });
-    </script>
+  <script>
+    // Função para disparar eventos do pixel
+    function trackUtmifyEvent(eventName, eventData = {}) {
+      const interval = setInterval(() => {
+        if (window.utmify && typeof utmify.track === 'function') {
+          utmify.track(eventName, eventData);
+          console.log(`Evento enviado para UTMify: ${eventName}`, eventData);
+          clearInterval(interval);
+        }
+      }, 300);
+      setTimeout(() => clearInterval(interval), 8000);
+    }
+
+    // Dispara InitiateCheckout assim que a página estiver pronta
+    document.addEventListener('DOMContentLoaded', () => {
+      trackUtmifyEvent('InitiateCheckout');
+    });
+
+    // Quando o QR Code PIX for gerado, dispara o evento Purchase
+    async function generatePIX() {
+      const response = await fetch("/api/generate-pix");
+      const data = await response.json();
+
+      if (data.qrCode) {
+        // Mostra o QR Code na tela
+        document.querySelector("#pix-qrcode").src = data.qrCode;
+
+        // Dispara evento de compra
+        const eventData = {
+          transactionId: data.txid,
+          value: data.amount,
+          currency: "BRL",
+          paymentMethod: "PIX"
+        };
+        trackUtmifyEvent('Purchase', eventData);
+      }
+    }
+  </script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Teko:wght@400;700&family=Poppins:wght@400;700&display=swap');
         
