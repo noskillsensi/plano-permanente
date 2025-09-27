@@ -35,7 +35,7 @@
         .form-input { background-color: #2A2A2A; border: 1px solid #4B4B4B; color: #FFF; width: 100%; padding: 0.75rem 1rem; border-radius: 0.5rem; }
         .form-input:focus { outline: none; border-color: #E53935; box-shadow: 0 0 0 2px rgba(229, 57, 53, 0.5); }
         .input-description { font-size: 0.75rem; color: #9ca3af; margin-bottom: 0.5rem; font-weight: 400; }
-        .btn-cta { background-color: #E53935; transition: background-color 0.3s ease; width: 100%; color: #FFF; font-family: 'Teko', sans-serif; font-size: 1.6rem; font-weight: 700; padding: 0.75rem; border-radius: 0.5rem; display: flex; align-items: center; justify-content: center; gap: 0.5rem; letter-spacing: 0.05em; } /* <-- FONTE AJUSTADA */
+        .btn-cta { background-color: #E53935; transition: background-color 0.3s ease; width: 100%; color: #FFF; font-family: 'Teko', sans-serif; font-size: 1.6rem; font-weight: 700; padding: 0.75rem; border-radius: 0.5rem; display: flex; align-items: center; justify-content: center; gap: 0.5rem; letter-spacing: 0.05em; }
         .btn-cta:hover { background-color: #C62828; }
         #loading-spinner { display: none; width: 1.5rem; height: 1.5rem; border: 3px solid rgba(255,255,255,0.3); border-top-color: #FFF; border-radius: 50%; animation: spin 1s linear infinite; }
         @keyframes spin { to { transform: rotate(360deg); } }
@@ -47,11 +47,11 @@
         .price-anchor .original { text-decoration: line-through; color: #9ca3af; font-size: 0.875rem; }
         .price-anchor .current { color: #22c55e; font-size: 1.5rem; font-weight: 700; }
         .step-number { display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; background-color: #E53935; border-radius: 50%; color: #FFF; font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 1rem; margin-right: 0.75rem; line-height: 1; }
-        .nested-card { background-color: #2A2A2A; border-radius: 0.5rem; padding: 1.25rem; border: 1px solid #404040; box-shadow: 0 4px 15px rgba(0,0,0,0.2); } /* <-- VISIBILIDADE MELHORADA */
+        .nested-card { background-color: #2A2A2A; border-radius: 0.5rem; padding: 1.25rem; border: 1px solid #404040; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
         
         /* --- NOVA SEÇÃO DE PAGAMENTO --- */
         .payment-selector { display: flex; align-items: center; gap: 0.75rem; background-color: #2A2A2A; border: 2px solid #E53935; border-radius: 0.5rem; padding: 1rem; font-weight: 700; font-size: 1.125rem; margin-bottom: 1.5rem; }
-        .payment-selector img { height: 28px; width: auto; }
+        .payment-selector svg { height: 28px; width: 28px; fill: #FFFFFF; } /* <-- ESTILO DO ÍCONE PIX SVG */
         .pix-action-box .benefits { display: flex; flex-direction: column; gap: 1rem; }
         .pix-action-box .benefit-item { display: flex; align-items: center; gap: 1rem; padding-bottom: 1rem; border-bottom: 1px solid #3c3c3c; }
         .pix-action-box .benefit-item:last-child { border-bottom: none; padding-bottom: 0; }
@@ -125,7 +125,7 @@
                     <h2 class="card-title"><span class="step-number">2</span>Pagamento</h2>
                     
                     <div class="payment-selector">
-                        <img src="https://i.ibb.co/Ld42T6R/pix-icon-white.png" alt="Ícone PIX">
+                        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="m50 0c-27.614 0-50 22.386-50 50s22.386 50 50 50 50-22.386 50-50-22.386-50-50-50zm29.387 73.457-21.355-21.355-11.258 11.258c-1.125-1.09-2.129-2.29-3.032-3.565l16.129-16.129-6.032-6.032c-1.09 1.125-2.29 2.129-3.565 3.032l-11.258-11.258-21.355-21.355h28.161l28.161 28.161v28.161zm3.871-3.871v-23.323l-23.323 23.323h23.323zm-23.323-34.419-11.258 11.258-11.258-11.258c1.09-1.125 2.29-2.129 3.565-3.032l11.258 11.258 6.032-6.032c-1.125-1.09-2.129-2.29-3.032-3.565l11.258-11.258 21.355 21.355v-28.161h-28.161l-21.355 21.355h23.323v8.387z"></path></svg>
                         <span>PIX</span>
                     </div>
 
