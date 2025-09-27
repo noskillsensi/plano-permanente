@@ -18,12 +18,12 @@
         button,input,textarea{font-family:inherit;font-size:100%;font-weight:inherit;line-height:inherit;color:inherit;margin:0;padding:0;background-color:transparent;background-image:none;}
         textarea{resize:vertical}
         button{cursor:pointer}
-        hr { border: none; border-top: 1px solid #333; }
+        hr { border: none; border-top: 1px solid #3c3c3c; }
         
         /* --- ESTRUTURA E LAYOUT --- */
         .container { max-width: 470px; margin: 0 auto; padding: 0 1rem 1rem 1rem; }
         .card { background-color: #1E1E1E; border: 1px solid #333; border-radius: 0.75rem; padding: 1.25rem; margin-bottom: 1.5rem; }
-        .sticky-bar { background-color: #E53935; text-align: center; padding: 0.75rem; font-weight: 700; position: sticky; top: 0; z-index: 50; display: flex; align-items: center; justify-content: center; gap: 0.5rem; }
+        .static-bar { background-color: #E53935; text-align: center; padding: 0.75rem; font-weight: 700; display: flex; align-items: center; justify-content: center; gap: 0.5rem; }
         
         /* --- TIPOGRAFIA --- */
         h1.main-title { font-family: 'Teko', sans-serif; text-transform: uppercase; font-size: 2.25rem; letter-spacing: 0.05em; text-align: center; margin-bottom: 1.5rem; }
@@ -35,7 +35,7 @@
         .form-input { background-color: #2A2A2A; border: 1px solid #4B4B4B; color: #FFF; width: 100%; padding: 0.75rem 1rem; border-radius: 0.5rem; }
         .form-input:focus { outline: none; border-color: #E53935; box-shadow: 0 0 0 2px rgba(229, 57, 53, 0.5); }
         .input-description { font-size: 0.75rem; color: #9ca3af; margin-bottom: 0.5rem; font-weight: 400; }
-        .btn-cta { background-color: #E53935; transition: background-color 0.3s ease; width: 100%; color: #FFF; font-family: 'Teko', sans-serif; font-size: 1.75rem; font-weight: 700; padding: 0.75rem; border-radius: 0.5rem; display: flex; align-items: center; justify-content: center; gap: 0.5rem; letter-spacing: 0.05em; }
+        .btn-cta { background-color: #E53935; transition: background-color 0.3s ease; width: 100%; color: #FFF; font-family: 'Teko', sans-serif; font-size: 1.6rem; font-weight: 700; padding: 0.75rem; border-radius: 0.5rem; display: flex; align-items: center; justify-content: center; gap: 0.5rem; letter-spacing: 0.05em; } /* <-- FONTE AJUSTADA */
         .btn-cta:hover { background-color: #C62828; }
         #loading-spinner { display: none; width: 1.5rem; height: 1.5rem; border: 3px solid rgba(255,255,255,0.3); border-top-color: #FFF; border-radius: 50%; animation: spin 1s linear infinite; }
         @keyframes spin { to { transform: rotate(360deg); } }
@@ -47,7 +47,7 @@
         .price-anchor .original { text-decoration: line-through; color: #9ca3af; font-size: 0.875rem; }
         .price-anchor .current { color: #22c55e; font-size: 1.5rem; font-weight: 700; }
         .step-number { display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; background-color: #E53935; border-radius: 50%; color: #FFF; font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 1rem; margin-right: 0.75rem; line-height: 1; }
-        .nested-card { background-color: #2A2A2A; border-radius: 0.5rem; padding: 1.25rem; }
+        .nested-card { background-color: #2A2A2A; border-radius: 0.5rem; padding: 1.25rem; border: 1px solid #404040; box-shadow: 0 4px 15px rgba(0,0,0,0.2); } /* <-- VISIBILIDADE MELHORADA */
         
         /* --- NOVA SEÇÃO DE PAGAMENTO --- */
         .payment-selector { display: flex; align-items: center; gap: 0.75rem; background-color: #2A2A2A; border: 2px solid #E53935; border-radius: 0.5rem; padding: 1rem; font-weight: 700; font-size: 1.125rem; margin-bottom: 1.5rem; }
@@ -81,7 +81,7 @@
 </head>
 <body>
 
-    <div class="sticky-bar">
+    <div class="static-bar">
         <i class="fa-regular fa-clock"></i>
         <span>Seu Acesso VIP com desconto expira em: <span id="timer">15:00</span></span>
     </div>
@@ -125,7 +125,7 @@
                     <h2 class="card-title"><span class="step-number">2</span>Pagamento</h2>
                     
                     <div class="payment-selector">
-                        <img src="https://i.ibb.co/kskYht3H/pix-svgrepo-com.png" alt="Ícone PIX">
+                        <img src="https://i.ibb.co/Ld42T6R/pix-icon-white.png" alt="Ícone PIX">
                         <span>PIX</span>
                     </div>
 
