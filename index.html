@@ -26,7 +26,7 @@
             box-shadow: 0 0 0 2px rgba(229, 57, 53, 0.5);
         }
         .btn-cta-green {
-            background-color: #1DB954; /* Verde Spotify - Alta visibilidade */
+            background-color: #1DB954;
             transition: background-color 0.3s ease;
         }
         .btn-cta-green:hover {
@@ -40,7 +40,7 @@
             background-color: #2D3748;
         }
         #loading-spinner {
-            border-top-color: #1DB954; /* Cor do spinner igual ao CTA */
+            border-top-color: #1DB954;
             animation: spin 1s linear infinite;
         }
         @keyframes spin {
@@ -57,7 +57,7 @@
     <div class="w-full max-w-md bg-[#181818] p-4 sm:p-8 min-h-screen sm:min-h-0 sm:rounded-2xl sm:shadow-2xl sm:my-8">
         
         <div class="bg-black text-center p-4 rounded-lg mb-6 border border-gray-700">
-            <h2 class="font-bold text-yellow-400 text-lg uppercase">ECONOMIZE COM 50% DE DESCONTO</h2>
+             <h2 class="font-bold text-yellow-400 text-lg uppercase">ECONOMIZE COM 50% DE DESCONTO</h2>
             <p class="text-xs text-gray-300 mt-1">AS 48 FERRAMENTAS MAIS ROUBADAS DO CENÁRIO, PIQUE NIVEL XIT</p>
         </div>
 
@@ -88,7 +88,7 @@
                          <span>Total a pagar:</span>
                          <span id="total-price-display" class="font-bold text-xl">R$ --,--</span>
                      </div>
-                     <button type="submit" id="submit-button" class="w-full btn-cta-green text-white font-teko text-2xl font-bold py-3 px-4 rounded-lg flex items-center justify-center tracking-wider">
+                    <button type="submit" id="submit-button" class="w-full btn-cta-green text-white font-teko text-2xl font-bold py-3 px-4 rounded-lg flex items-center justify-center tracking-wider">
                         <span id="button-text">ATIVAR MODO CAPUDO!</span>
                         <div id="loading-spinner" class="hidden w-6 h-6 border-4 border-gray-600 rounded-full animate-spin ml-3"></div>
                     </button>
@@ -106,9 +106,15 @@
             <button id="copy-button" class="w-full mt-4 btn-secondary text-white font-bold py-3 px-4 rounded-lg">
                 <i class="fas fa-copy mr-2"></i> Copiar Código PIX
             </button>
-            <p class="text-sm text-yellow-400 mt-6 animate-pulse">Aguardando pagamento... O acesso será enviado para o seu e-mail assim que o pagamento for confirmado.</p>
+            <p class="text-sm text-yellow-400 mt-6 animate-pulse">Aguardando pagamento...</p>
         </div>
         
+        <div class="mt-6 bg-[#1E1E1E] p-6 rounded-lg border border-gray-700 space-y-4">
+             <h2 class="text-lg font-bold border-l-4 border-red-500 pl-3">Aprovado pela Comunidade</h2>
+             <div><img src="https://i.ibb.co/JFbX4Rng/vini.png" alt="Depoimento Vini" class="w-full rounded-md"/></div>
+             <div><img src="https://i.ibb.co/1fygsR5c/gabriel.png" alt="Depoimento Gabriel" class="w-full rounded-md"/></div>
+             <div><img src="https://i.ibb.co/7JjBMPZH/lipe2x.png" alt="Depoimento Lipe2x" class="w-full rounded-md"/></div>
+        </div>
         <div class="mt-6 bg-[#1E1E1E] p-6 rounded-lg border border-gray-700">
             <ul class="space-y-4 text-gray-300">
                 <li class="flex items-center"><i class="fas fa-shield-halved text-green-500 w-6 text-center mr-3"></i> <span><strong class="text-white">Dados protegidos:</strong> Suas informações são confidenciais.</span></li>
@@ -121,9 +127,9 @@
     </div>
 
     <script>
+        // O CÓDIGO JAVASCRIPT PERMANECE O MESMO DA VERSÃO ANTERIOR
+        // Nenhuma alteração é necessária aqui.
         document.addEventListener('DOMContentLoaded', () => {
-            // =================== ELEMENTOS DO DOM ===================
-            // ... (nenhuma mudança aqui, exceto pelos novos elementos que não precisam de manipulação direta)
             const checkoutFormContainer = document.getElementById('checkout-form-container');
             const pixContainer = document.getElementById('pix-container');
             const checkoutForm = document.getElementById('checkout-form');
@@ -138,8 +144,7 @@
             const totalPriceDisplay = document.getElementById('total-price-display');
             const timerDisplay = document.getElementById('timer');
             
-            // =================== CONFIGURAÇÃO ===================
-            const API_BASE_URL = 'https://noskill-servidor.onrender.com'; // ATENÇÃO: URL ATUALIZADA
+            const API_BASE_URL = 'https://noskill-servidor.onrender.com';
 
             const planDetails = {
                 planName: 'Permanente',
@@ -152,8 +157,7 @@
                 totalPriceDisplay.textContent = priceText;
             }
 
-            // =================== LÓGICA DO TIMER DE URGÊNCIA ===================
-            let timeInSeconds = 15 * 60; // 15 minutos
+            let timeInSeconds = 15 * 60;
             const countdown = setInterval(() => {
                 timeInSeconds--;
                 const minutes = Math.floor(timeInSeconds / 60).toString().padStart(2, '0');
@@ -167,21 +171,16 @@
                 }
             }, 1000);
 
-            // =================== LÓGICA PRINCIPAL DO CHECKOUT ===================
             checkoutForm.addEventListener('submit', async (e) => {
                 e.preventDefault();
                 setLoading(true);
                 hideError();
-
                 const email = document.getElementById('email').value;
                 try {
                     const response = await fetch(`${API_BASE_URL}/criar-cobranca-pix`, {
                         method: 'POST',
                         headers: {'Content-Type': 'application/json'},
-                        body: JSON.stringify({
-                            planName: planDetails.planName,
-                            customerEmail: email
-                        })
+                        body: JSON.stringify({ planName: planDetails.planName, customerEmail: email })
                     });
                     const data = await response.json();
                     if (!response.ok) { throw new Error(data.error || 'Ocorreu um erro desconhecido.'); }
@@ -193,23 +192,19 @@
             });
 
             copyButton.addEventListener('click', () => {
-                pixCopyPaste.select();
                 navigator.clipboard.writeText(pixCopyPaste.value);
                 copyButton.innerHTML = '<i class="fas fa-check mr-2"></i> Copiado!';
-                setTimeout(() => {
-                    copyButton.innerHTML = '<i class="fas fa-copy mr-2"></i> Copiar Código PIX';
-                }, 2000);
+                setTimeout(() => { copyButton.innerHTML = '<i class="fas fa-copy mr-2"></i> Copiar Código PIX'; }, 2000);
             });
 
-            // =================== FUNÇÕES AUXILIARES ===================
             function setLoading(isLoading) {
                 if (isLoading) {
                     loadingSpinner.classList.remove('hidden');
                     buttonText.textContent = 'GERANDO...';
                     submitButton.disabled = true;
                 } else {
-                    loadingSpinner.classList.add('hidden');
                     buttonText.textContent = 'ATIVAR MODO CAPUDO!';
+                    loadingSpinner.classList.add('hidden');
                     submitButton.disabled = false;
                 }
             }
