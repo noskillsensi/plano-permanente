@@ -7,17 +7,17 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Teko:wght@400;700&family=Poppins:wght@400;600&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Teko:wght@400;700&family=Poppins:wght@400;600;700&display=swap');
         body {
             font-family: 'Poppins', sans-serif;
-            background-color: #121212;
+            background-color: #0a0a0a; /* Fundo um pouco mais suave */
         }
         .font-teko {
             font-family: 'Teko', sans-serif;
         }
         .form-input {
-            background-color: #1E1E1E;
-            border: 1px solid #333;
+            background-color: #2D3748;
+            border: 1px solid #4A5568;
             color: #FFF;
         }
         .form-input:focus {
@@ -26,157 +26,181 @@
             box-shadow: 0 0 0 2px rgba(229, 57, 53, 0.5);
         }
         .btn-primary {
-            background-color: #E53935;
-            transition: background-color 0.3s ease;
+            background: linear-gradient(to right, #16A34A, #15803D); /* Gradiente Verde */
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(22, 163, 74, 0.2);
         }
         .btn-primary:hover {
-            background-color: #C62828;
-        }
-        .btn-secondary {
-            background-color: #4A5568;
-            transition: background-color 0.3s ease;
-        }
-        .btn-secondary:hover {
-            background-color: #2D3748;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(22, 163, 74, 0.4);
         }
         #loading-spinner {
-            border-top-color: #E53935;
+            border-top-color: #FFF;
             animation: spin 1s linear infinite;
         }
-        @keyframes spin {
-            to { transform: rotate(360deg); }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .star-rating .fa-star { color: #FBBF24; }
+        @keyframes pulse-red {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
         }
+        .pulse-live { animation: pulse-red 1.5s infinite; }
     </style>
 </head>
-<body class="flex items-center justify-center min-h-screen p-4">
-    <div class="w-full max-w-md bg-[#1E1E1E] rounded-2xl shadow-2xl p-8 border border-gray-800">
-        
-        <!-- CABEÇALHO -->
-        <div class="text-center mb-8">
-            <img src="https://i.imgur.com/OfdLSLU.png" alt="Logo Noskill.Sensi" class="mx-auto mb-4 w-32"/>
-            <h1 class="font-teko text-4xl font-bold text-white uppercase">Finalizar Compra</h1>
-            <p class="text-gray-400 text-sm">A sua mira perfeita está a um passo de distância.</p>
-        </div>
+<body class="bg-gray-900 text-gray-200">
 
-        <!-- DIV DE ERRO -->
-        <div id="error-message" class="hidden bg-red-900/50 border border-red-500/30 text-red-300 text-sm p-3 rounded-lg mb-6 text-center"></div>
+    <!-- BARRA DE URGÊNCIA -->
+    <div id="urgency-bar" class="bg-red-600 text-white p-2.5 text-center font-bold sticky top-0 z-50 shadow-lg flex items-center justify-center gap-3">
+        <i class="fas fa-clock pulse-live text-xl"></i>
+        <p class="font-teko text-xl tracking-wider"><span class="hidden sm:inline">Seu Acesso VIP com Desconto expira em:</span> <span id="countdown-timer">14:59</span></p>
+    </div>
 
-        <!-- FORMULÁRIO INICIAL -->
-        <div id="checkout-form-container">
-            <div class="mb-6 bg-black/30 p-4 rounded-lg border border-gray-700">
-                <h2 class="font-bold text-lg text-white">Resumo do Pedido</h2>
-                <div class="flex justify-between items-center mt-2">
-                    <span id="plan-name-display" class="text-gray-300">Carregando plano...</span>
-                    <span id="plan-price-display" class="font-bold text-xl text-white">R$ --,--</span>
+    <div class="flex items-center justify-center min-h-screen py-8 px-4">
+        <div class="w-full max-w-lg">
+            
+            <!-- BANNER DE OFERTA -->
+            <div class="mb-6 rounded-lg overflow-hidden shadow-lg">
+                <img src="https://i.ibb.co/L842S0b/banner-50.png" alt="Banner de Oferta Especial Economize com 50% de Desconto" class="w-full h-auto">
+            </div>
+
+            <!-- CONTAINER PRINCIPAL DO CHECKOUT -->
+            <div class="bg-[#1E1E1E] rounded-2xl shadow-2xl overflow-hidden border border-gray-800">
+                <div class="p-6 sm:p-8">
+                    <!-- CABEÇALHO E RESUMO DO PRODUTO -->
+                    <div class="flex items-center gap-4 mb-6 pb-6 border-b border-gray-700">
+                        <img src="https://i.ibb.co/L842S0b/banner-50.png" alt="Ícone do Produto Aplicativo Noskill" class="w-20 h-20 rounded-lg border-2 border-gray-700">
+                        <div class="flex-1">
+                            <h1 class="font-bold text-white text-xl">Aplicativo Noskill</h1>
+                            <p id="plan-price-display" class="font-teko text-4xl text-green-400">R$ --,--</p>
+                            <p class="text-gray-400 text-sm">Pagamento via PIX</p>
+                        </div>
+                    </div>
+                    
+                    <!-- FORMULÁRIO E PIX -->
+                    <div id="checkout-form-container">
+                        <div class="bg-black/20 p-4 rounded-lg border border-gray-700 mb-6 flex items-center">
+                           <div class="bg-red-600 w-8 h-8 rounded-full flex items-center justify-center font-bold text-white mr-4">1</div>
+                           <p class="text-white font-bold text-lg">Identificação</p>
+                        </div>
+                        <form id="checkout-form">
+                            <div class="mb-4"><label for="name" class="block text-gray-400 text-sm font-bold mb-2">Nome completo:</label><input type="text" id="name" name="name" class="form-input w-full px-4 py-3 rounded-lg" placeholder="Seu nome aqui" required></div>
+                            <div class="mb-6"><label for="email" class="block text-gray-400 text-sm font-bold mb-2">Seu melhor e-mail:</label><input type="email" id="email" name="email" class="form-input w-full px-4 py-3 rounded-lg" placeholder="Este e-mail receberá o produto" required></div>
+                            <button type="submit" id="submit-button" class="w-full btn-primary text-white font-teko text-2xl tracking-wider py-4 px-4 rounded-lg flex items-center justify-center"><span id="button-text">ATIVAR MODO CAPUDO!</span><div id="loading-spinner" class="hidden w-6 h-6 border-4 border-white/50 rounded-full animate-spin ml-3"></div></button>
+                        </form>
+                    </div>
+
+                    <div id="pix-container" class="hidden">
+                         <div class="bg-black/20 p-4 rounded-lg border border-gray-700 mb-6 flex items-center">
+                           <div class="bg-red-600 w-8 h-8 rounded-full flex items-center justify-center font-bold text-white mr-4">2</div>
+                           <p class="text-white font-bold text-lg">Pagamento</p>
+                        </div>
+                        <div class="text-center bg-gray-900/50 p-6 rounded-lg">
+                            <h2 class="font-teko text-3xl font-bold text-white uppercase mb-2">Pague com PIX</h2>
+                             <ul class="text-gray-400 text-sm space-y-2 mb-4 text-left"><li class="flex items-center gap-2"><i class="fas fa-check-circle text-green-500"></i><span>Sua compra é confirmada em segundos.</span></li><li class="flex items-center gap-2"><i class="fas fa-qrcode text-green-500"></i><span>Escaneie o QR Code ou copie o código.</span></li><li class="flex items-center gap-2"><i class="fas fa-shield-alt text-green-500"></i><span>Segurança garantida pelo Banco Central.</span></li></ul>
+                            <img id="pix-qrcode" src="" alt="PIX QR Code" class="mx-auto w-56 h-56 bg-white p-2 rounded-lg mb-4 border-4 border-green-500"><textarea id="pix-copy-paste" class="w-full bg-gray-800 p-2 rounded text-gray-300 text-xs border-gray-700 focus:outline-none resize-none" rows="3" readonly></textarea>
+                            <button id="copy-button" class="w-full mt-4 bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-4 rounded-lg transition-colors"><i class="fas fa-copy mr-2"></i> Copiar Código PIX</button>
+                            <p class="text-xs text-yellow-400 mt-4 animate-pulse">Aguardando pagamento... O acesso será enviado para o seu e-mail.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <form id="checkout-form">
-                <div class="mb-4">
-                    <label for="email" class="block text-gray-400 text-sm font-bold mb-2">Seu melhor e-mail:</label>
-                    <input type="email" id="email" name="email" class="form-input w-full px-4 py-3 rounded-lg" placeholder="voce@exemplo.com" required>
+            <!-- PILAR DE CONFIANÇA E PROVA SOCIAL -->
+            <div class="mt-6 bg-[#1E1E1E] rounded-2xl shadow-2xl p-6 sm:p-8 border border-gray-800">
+                <div class="space-y-4">
+                    <div class="bg-gray-900/50 p-4 rounded-lg flex items-start gap-4"><img src="https://i.ibb.co/d0cmxVv/vini.png" alt="Avatar Vini" class="w-12 h-12 rounded-full border-2 border-gray-700"><div class="flex-1"><div class="flex justify-between items-center"><p class="font-bold text-white">Vini</p><div class="star-rating text-xs"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div></div><p class="text-gray-300 text-sm mt-1">"Pensei que ia ser mó trampo pra instalar, chegou o link no e-mail, instalei e já era. Em 2 minutos eu já tava amassando na rank, bglh simples e direto"</p></div></div>
+                    <div class="bg-gray-900/50 p-4 rounded-lg flex items-start gap-4"><img src="https://i.ibb.co/Vvz7z1r/gabriel.png" alt="Avatar Gabrielxs" class="w-12 h-12 rounded-full border-2 border-gray-700"><div class="flex-1"><div class="flex justify-between items-center"><p class="font-bold text-white">Gabrielxs</p><div class="star-rating text-xs"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div></div><p class="text-gray-300 text-sm mt-1">"pprt depois que instalei parece que tô xitado kkkk a mira não pina mais, só vermelho. A 2x automática é a mais gostosa do jogo, podem comprar sem medo"</p></div></div>
+                    <div class="bg-gray-900/50 p-4 rounded-lg flex items-start gap-4"><img src="https://i.ibb.co/Wc4M9gH/lipe2x.png" alt="Avatar Lipe2x" class="w-12 h-12 rounded-full border-2 border-gray-700"><div class="flex-1"><div class="flex justify-between items-center"><p class="font-bold text-white">Lipe2x</p><div class="star-rating text-xs"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div></div><p class="text-gray-300 text-sm mt-1">"O mais foda é que o app tá sempre atualizado pra nova temporada. Comprei o vitalício e não me preocupo mais. As funções é só ligar e pronto, a mágica acontece confia"</p></div></div>
                 </div>
-                
-                <button type="submit" id="submit-button" class="w-full btn-primary text-white font-bold py-3 px-4 rounded-lg text-lg flex items-center justify-center">
-                    <span id="button-text">Gerar PIX para Pagamento</span>
-                    <div id="loading-spinner" class="hidden w-6 h-6 border-4 border-gray-600 rounded-full animate-spin ml-3"></div>
-                </button>
-            </form>
-             <p class="text-xs text-gray-600 text-center mt-4"><i class="fas fa-lock mr-1"></i> Ambiente 100% seguro. Seus dados estão protegidos.</p>
-        </div>
 
-        <!-- ÁREA DO PIX GERADO -->
-        <div id="pix-container" class="hidden text-center">
-            <h2 class="font-teko text-3xl font-bold text-white uppercase mb-2">Pague com PIX</h2>
-            <p class="text-gray-400 mb-4">Escaneie o QR Code ou use o Copia e Cola.</p>
-            
-            <img id="pix-qrcode" src="" alt="PIX QR Code" class="mx-auto w-64 h-64 bg-white p-2 rounded-lg mb-4 border-4 border-green-500">
-            
-            <div class="bg-black/30 p-3 rounded-lg">
-                <textarea id="pix-copy-paste" class="w-full bg-transparent text-gray-300 text-xs border-none focus:outline-none resize-none" rows="3" readonly></textarea>
+                <div class="mt-8 border-t border-gray-700 pt-6 space-y-4">
+                     <div class="flex items-center gap-3 text-green-400"><i class="fas fa-shield-alt w-5 text-center text-xl"></i><p class="text-gray-300 text-sm"><strong>Dados Protegidos:</strong> Suas informações são confidenciais e seguras.</p></div>
+                     <div class="flex items-center gap-3 text-green-400"><i class="fas fa-lock w-5 text-center text-xl"></i><p class="text-gray-300 text-sm"><strong>Pagamento 100% Seguro:</strong> Todas as transações são criptografadas.</p></div>
+                     <div class="flex items-center gap-3 text-green-400"><i class="fas fa-check-circle w-5 text-center text-xl"></i><p class="text-gray-300 text-sm"><strong>Garantia de 7 dias:</strong> Você tem 7 dias para testar o produto, risco zero.</p></div>
+                </div>
             </div>
-            <button id="copy-button" class="w-full mt-4 btn-secondary text-white font-bold py-3 px-4 rounded-lg">
-                <i class="fas fa-copy mr-2"></i> Copiar Código PIX
-            </button>
-            <p class="text-sm text-yellow-400 mt-6 animate-pulse">Aguardando pagamento... O acesso será enviado para o seu e-mail assim que o pagamento for confirmado.</p>
         </div>
     </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // =================== ELEMENTOS DO DOM ===================
             const checkoutFormContainer = document.getElementById('checkout-form-container');
             const pixContainer = document.getElementById('pix-container');
             const checkoutForm = document.getElementById('checkout-form');
             const submitButton = document.getElementById('submit-button');
             const buttonText = document.getElementById('button-text');
             const loadingSpinner = document.getElementById('loading-spinner');
-            const errorMessageDiv = document.getElementById('error-message');
             const pixQrcode = document.getElementById('pix-qrcode');
             const pixCopyPaste = document.getElementById('pix-copy-paste');
             const copyButton = document.getElementById('copy-button');
-            const planNameDisplay = document.getElementById('plan-name-display');
             const planPriceDisplay = document.getElementById('plan-price-display');
+            const countdownTimer = document.getElementById('countdown-timer');
             
-            // =================== CONFIGURAÇÃO ===================
-            // ATENÇÃO: Em produção, mude esta URL para o endereço do seu servidor na Render.
             const API_BASE_URL = 'https://potential-space-trout-7vxgxrqq4vg9cwrv9-3000.app.github.dev'; 
 
-            // Simulação de dados do plano (em um sistema real, isso viria da página anterior)
-            const planDetails = {
-                planName: 'Permanente',
-                planPrice: '14,97'
+            const planMap = {
+                'mensal': { name: 'Mensal', price: '4,97' },
+                'trimestral': { name: 'Trimestral', price: '9,97' },
+                'permanente': { name: 'Permanente', price: '14,97' }
             };
+
+            const urlParams = new URLSearchParams(window.location.search);
+            const planKey = urlParams.get('plano') || 'permanente'; 
+            const currentPlan = planMap[planKey.toLowerCase()] || planMap.permanente;
             
-            // Preenche os detalhes do plano na página
-            if (planNameDisplay && planPriceDisplay) {
-                planNameDisplay.textContent = `Plano ${planDetails.planName}`;
-                planPriceDisplay.textContent = `R$ ${planDetails.planPrice}`;
+            if (planPriceDisplay) {
+                planPriceDisplay.textContent = `R$ ${currentPlan.price}`;
             }
 
-            // =================== LÓGICA PRINCIPAL ===================
-            
-            // Função para lidar com o envio do formulário
+            let timeLeft = 15 * 60;
+            function updateTimer() {
+                if (!countdownTimer) return;
+                const minutes = Math.floor(timeLeft / 60).toString().padStart(2, '0');
+                const seconds = (timeLeft % 60).toString().padStart(2, '0');
+                countdownTimer.textContent = `${minutes}:${seconds}`;
+                if (timeLeft > 0) {
+                    timeLeft--;
+                } else {
+                    countdownTimer.textContent = "Expirado!";
+                    document.getElementById('urgency-bar').classList.remove('bg-red-600');
+                    document.getElementById('urgency-bar').classList.add('bg-gray-800');
+                }
+            }
+            setInterval(updateTimer, 1000);
+            updateTimer();
+
             checkoutForm.addEventListener('submit', async (e) => {
-                e.preventDefault(); // Impede o envio padrão do formulário
-                
-                // Exibe o spinner e desabilita o botão
+                e.preventDefault();
                 setLoading(true);
-                hideError();
 
                 const email = document.getElementById('email').value;
+                const name = document.getElementById('name').value;
 
                 try {
-                    // Faz a chamada para o nosso backend para criar a cobrança
                     const response = await fetch(`${API_BASE_URL}/criar-cobranca-pix`, {
                         method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
+                        headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({
-                            planName: planDetails.planName,
+                            planName: currentPlan.name,
                             customerEmail: email
                         })
                     });
 
                     const data = await response.json();
-
-                    if (!response.ok) {
-                        // Se a resposta do servidor não for OK, lança um erro
-                        throw new Error(data.error || 'Ocorreu um erro desconhecido.');
+                    if (!response.ok) throw new Error(data.error || 'Ocorreu um erro.');
+                    
+                    if (typeof fbq === 'function') {
+                         fbq('track', 'InitiateCheckout');
                     }
 
-                    // Se a cobrança foi criada com sucesso:
                     displayPixInfo(data);
 
                 } catch (error) {
-                    // Em caso de erro, exibe a mensagem
-                    showError(error.message);
+                    console.error("Erro no checkout:", error);
                     setLoading(false);
                 }
             });
 
-            // Função para copiar o código PIX
             copyButton.addEventListener('click', () => {
                 pixCopyPaste.select();
                 document.execCommand('copy');
@@ -186,17 +210,14 @@
                 }, 2000);
             });
 
-
-            // =================== FUNÇÕES AUXILIARES ===================
-
             function setLoading(isLoading) {
                 if (isLoading) {
                     loadingSpinner.classList.remove('hidden');
-                    buttonText.textContent = 'Gerando...';
+                    buttonText.style.display = 'none';
                     submitButton.disabled = true;
                 } else {
                     loadingSpinner.classList.add('hidden');
-                    buttonText.textContent = 'Gerar PIX para Pagamento';
+                    buttonText.style.display = 'inline';
                     submitButton.disabled = false;
                 }
             }
@@ -207,17 +228,7 @@
                 checkoutFormContainer.classList.add('hidden');
                 pixContainer.classList.remove('hidden');
             }
-            
-            function showError(message) {
-                errorMessageDiv.textContent = message;
-                errorMessageDiv.classList.remove('hidden');
-            }
-
-            function hideError() {
-                errorMessageDiv.classList.add('hidden');
-            }
         });
     </script>
 </body>
 </html>
-
