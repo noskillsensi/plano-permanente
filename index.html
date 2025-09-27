@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Checkout Seguro - Noskill Sensi</title>
+    <title>Finalizar Compra - Noskill Sensi</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         /* --- FONTES EMBUTIDAS E CSS COMPILADO --- */
@@ -32,21 +32,14 @@
         }
         *,:after,:before{box-sizing:border-box}
         body{margin:0;font-family:'Poppins',sans-serif;background-color:var(--bg-dark-primary);color:var(--text-primary);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+        .container{width:100%;max-width:600px;margin-left:auto;margin-right:auto;padding:0 1rem 2rem 1rem}
+        .card{background-color:var(--bg-dark-secondary);border:1px solid var(--border-color);border-radius:12px;padding:1.5rem}
         .font-teko{font-family:'Teko',sans-serif}
-        .container{width:100%;max-width:600px;margin-left:auto;margin-right:auto;padding:2rem 1.5rem}
-        .card{background-color:var(--bg-dark-secondary);border:1px solid var(--border-color);border-radius:12px;padding:2rem}
-        .step-indicator{display:flex;align-items:center;gap:1rem;margin-bottom:2rem}
-        .step-circle{width:40px;height:40px;border-radius:50%;background-color:var(--primary-red);color:white;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:1.25rem}
-        .step-title{font-family:'Teko',sans-serif;font-size:2.5rem;line-height:1;text-transform:uppercase}
-        .form-label{font-size:0.9rem;font-weight:600;color:var(--text-secondary);margin-bottom:0.5rem;display:block}
         .form-input{width:100%;background-color:#111;border:1px solid var(--border-color);color:var(--text-primary);padding:1rem;border-radius:8px;font-size:1rem}
         .form-input:focus{outline:none;border-color:var(--primary-red);box-shadow:0 0 0 3px rgba(229,57,53,0.4)}
         .cta-button{width:100%;background-color:var(--primary-red);color:white;padding:1rem;border-radius:8px;font-family:'Teko',sans-serif;font-size:1.75rem;font-weight:700;text-transform:uppercase;cursor:pointer;transition:background-color 0.2s ease}
         .cta-button:hover{background-color:#C62828}
         .testimonial-card{background-color:#242424;padding:1.5rem;border-radius:12px;border:1px solid var(--border-color)}
-        .testimonial-header{display:flex;align-items:center;gap:1rem;margin-bottom:1rem}
-        .testimonial-avatar{width:50px;height:50px;border-radius:50%}
-        .testimonial-rating{color:#FFC700}
         .modal-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background-color:rgba(0,0,0,0.8);display:flex;align-items:center;justify-content:center;z-index:1000;opacity:0;visibility:hidden;transition:opacity 0.3s ease, visibility 0.3s ease}
         .modal-overlay.active{opacity:1;visibility:visible}
         .modal-content{background-color:var(--bg-dark-secondary);padding:2rem;border-radius:12px;border:1px solid var(--border-color);width:90%;max-width:400px;text-align:center;transform:scale(0.95);transition:transform 0.3s ease}
@@ -54,91 +47,107 @@
     </style>
 </head>
 <body>
+    <div style="position: sticky; top: 0; z-index: 50; display: flex; align-items: center; justify-content: center; gap: 0.5rem; background-color: var(--primary-red); padding: 0.5rem; text-align: center; font-weight: 600;">
+        <i class="fa-regular fa-clock"></i>
+        <span>Seu Acesso VIP com desconto expira em: <span id="timer">14:58</span></span>
+    </div>
 
     <div class="container">
-        <header style="text-align: center; margin-bottom: 3rem;">
-            <img src="https://i.imgur.com/OfdLSLU.png" alt="Logo Noskill.Sensi" style="width: 100px; height: auto; margin: auto;">
-        </header>
-
-        <main style="display: grid; gap: 2rem;">
-            <section id="step-1">
-                <div class="step-indicator">
-                    <div class="step-circle">1</div>
-                    <h2 class="step-title">Identificação</h2>
-                </div>
-                <div class="card">
-                    <form id="checkout-form">
-                        <label for="email" class="form-label">Seu melhor e-mail para receber o acesso:</label>
-                        <input type="email" id="email" name="email" class="form-input" placeholder="voce@exemplo.com" required>
-                    </form>
-                </div>
-            </section>
+        <main style="display: grid; gap: 2rem; margin-top: 2rem;">
             
-            <section id="step-2">
-                <div class="step-indicator">
-                    <div class="step-circle">2</div>
-                    <h2 class="step-title">Pagamento</h2>
-                </div>
-                <div class="card" style="display: grid; gap: 1.5rem;">
-                    <div>
-                        <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1rem;">
-                            <span style="color: var(--text-secondary);">Plano Permanente:</span>
-                            <span style="font-weight: 600; font-size: 1.25rem;">R$ 14,97</span>
-                        </div>
-                        <div style="border-top: 1px solid var(--border-color); padding-top: 1rem; display: flex; justify-content: space-between; align-items: baseline;">
-                            <span style="font-weight: bold;">Total a pagar:</span>
-                            <span style="font-weight: bold; font-size: 1.5rem; color: #1DB954;">R$ 14,97</span>
-                        </div>
-                    </div>
-                    <div style="text-align: center; padding: 1rem; border-radius: 8px; background-color: #111; border: 1px solid var(--border-color);">
-                        <i class="fa-brands fa-pix" style="font-size: 1.5rem; margin-right: 0.5rem;"></i>
-                        <span style="font-weight: 600;">Pagamento seguro via PIX</span>
-                    </div>
-                    <button type="submit" form="checkout-form" id="submit-button" class="cta-button">
-                        Ativar Modo Capudo!
-                    </button>
-                    <div style="display: flex; align-items: center; justify-content: center; gap: 0.5rem; color: var(--text-secondary); font-size: 0.8rem;">
-                        <i class="fas fa-lock"></i>
-                        <span>Ambiente 100% seguro</span>
-                    </div>
-                </div>
+            <section>
+                <img src="https://i.ibb.co/vxWpxT6Y" alt="Banner 50% Desconto" style="width: 100%; border-radius: 12px;"/>
             </section>
 
-            <section id="testimonials">
+            <form id="checkout-form" style="display: grid; gap: 2rem;">
+                <section class="card">
+                    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;">
+                        <div style="width: 40px; height: 40px; border-radius: 50%; background-color: var(--primary-red); color: white; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.25rem; flex-shrink: 0;">1</div>
+                        <h2 class="font-teko" style="font-size: 2.5rem; line-height: 1; text-transform: uppercase;">Identificação</h2>
+                    </div>
+                    <div>
+                        <label for="email" style="font-size: 0.9rem; font-weight: 600; color: var(--text-secondary); margin-bottom: 0.5rem; display: block;">Seu melhor e-mail:</label>
+                        <input type="email" id="email" name="email" class="form-input" placeholder="Você receberá o acesso neste e-mail" required>
+                    </div>
+                </section>
+                
+                <section class="card">
+                    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;">
+                        <div style="width: 40px; height: 40px; border-radius: 50%; background-color: var(--primary-red); color: white; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.25rem; flex-shrink: 0;">2</div>
+                        <h2 class="font-teko" style="font-size: 2.5rem; line-height: 1; text-transform: uppercase;">Pagamento</h2>
+                    </div>
+                    <div style="display: grid; gap: 1.5rem;">
+                        <div style="padding: 1rem; border-radius: 8px; border: 1px solid var(--border-color); background-color: #242424;">
+                            <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                                <i class="fa-brands fa-pix" style="font-size: 2rem; color: #1DB954;"></i>
+                                <span style="font-weight: 600; font-size: 1.25rem;">Pagamento seguro via PIX</span>
+                            </div>
+                            <div style="display: grid; gap: 0.75rem; font-size: 0.9rem; color: var(--text-secondary);">
+                                <p>✔ Compra aprovada em segundos.</p>
+                                <p>✔ Praticidade para pagar.</p>
+                                <p>✔ Segurança do Banco Central.</p>
+                            </div>
+                        </div>
+                        <div>
+                            <div style="display: flex; justify-content: space-between; align-items: baseline;">
+                                <span style="color: var(--text-secondary);">Plano Permanente:</span>
+                                <span style="font-weight: 600; font-size: 1.1rem;">R$ 14,97</span>
+                            </div>
+                            <div style="border-top: 1px solid var(--border-color); margin-top: 1rem; padding-top: 1rem; display: flex; justify-content: space-between; align-items: baseline;">
+                                <span style="font-weight: bold;">Total a pagar:</span>
+                                <span style="font-weight: bold; font-size: 1.5rem; color: #1DB954;">R$ 14,97</span>
+                            </div>
+                        </div>
+                        <button type="submit" id="submit-button" class="cta-button">
+                            Ativar Modo Capudo!
+                        </button>
+                    </div>
+                </section>
+            </form>
+
+            <section>
                 <h2 class="font-teko" style="font-size: 2.5rem; text-align: center; margin-bottom: 2rem; text-transform: uppercase;">Aprovado por quem joga sério</h2>
                 <div style="display: grid; gap: 1.5rem;">
                     <div class="testimonial-card">
-                        <div class="testimonial-header">
-                            <img src="https://i.ibb.co/JFbX4Rng/vini.png" alt="Avatar Vini" class="testimonial-avatar">
+                        <div style="display:flex;align-items:center;gap:1rem;margin-bottom:1rem">
+                            <img src="https://i.ibb.co/JFbX4Rng/vini.png" alt="Avatar Vini" style="width:50px;height:50px;border-radius:50%">
                             <div>
                                 <p style="font-weight: 600;">Vini</p>
-                                <div class="testimonial-rating">★★★★★</div>
+                                <div style="color:#FFC700">★★★★★</div>
                             </div>
                         </div>
-                        <p style="color: var(--text-secondary); font-size: 0.9rem;">"Pensei que ia ser mó trampo pra instalar... Em 2 minutos eu já tava amassando na rank, bglh simples e direto"</p>
+                        <p style="color: var(--text-secondary); font-size: 0.9rem;">"Pensei que ia ser mó trampo pra instalar, chegou o link no e-mail, instalei e já era. Em 2 minutos eu já tava amassando na rank, bglh simples e direto"</p>
                     </div>
                     <div class="testimonial-card">
-                        <div class="testimonial-header">
-                            <img src="https://i.ibb.co/1fygsR5c/gabriel.png" alt="Avatar Gabrielxs" class="testimonial-avatar">
+                        <div style="display:flex;align-items:center;gap:1rem;margin-bottom:1rem">
+                            <img src="https://i.ibb.co/1fygsR5c/gabriel.png" alt="Avatar Gabrielxs" style="width:50px;height:50px;border-radius:50%">
                             <div>
                                 <p style="font-weight: 600;">Gabrielxs</p>
-                                <div class="testimonial-rating">★★★★★</div>
+                                <div style="color:#FFC700">★★★★★</div>
                             </div>
                         </div>
-                        <p style="color: var(--text-secondary); font-size: 0.9rem;">"...depois que instalei parece que tô xitado kkkk a mira não pina mais, só vermelho... podem comprar sem medo"</p>
+                        <p style="color: var(--text-secondary); font-size: 0.9rem;">"pprt depois que instalei parece que tô xitado kkkk a mira não pina mais, só vermelho. A 2x automática é a mais gostosa do jogo, podem comprar sem medo"</p>
                     </div>
                     <div class="testimonial-card">
-                        <div class="testimonial-header">
-                            <img src="https://i.ibb.co/7JjBMPZH/lipe2x.png" alt="Avatar Lipe2x" class="testimonial-avatar">
+                        <div style="display:flex;align-items:center;gap:1rem;margin-bottom:1rem">
+                            <img src="https://i.ibb.co/7JjBMPZH/lipe2x.png" alt="Avatar Lipe2x" style="width:50px;height:50px;border-radius:50%">
                             <div>
                                 <p style="font-weight: 600;">Lipe2x</p>
-                                <div class="testimonial-rating">★★★★★</div>
+                                <div style="color:#FFC700">★★★★★</div>
                             </div>
                         </div>
-                        <p style="color: var(--text-secondary); font-size: 0.9rem;">"O mais foda é que o app tá sempre atualizado pra nova temporada. Comprei o vitalício e não me preocupo mais."</p>
+                        <p style="color: var(--text-secondary); font-size: 0.9rem;">"O mais foda é que o app tá sempre atualizado pra nova temporada. Comprei o vitalício e não me preocupo mais. As funções é só ligar e pronto, a mágica acontece confia"</p>
                     </div>
                 </div>
             </section>
+            
+            <footer style="text-align: center; margin-top: 2rem; border-top: 1px solid var(--border-color); padding-top: 2rem;">
+                <div style="display: flex; justify-content: center; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                    <img src="https://i.ibb.co/Q8Qv5M4/compra-segura.png" alt="Compra 100% Segura" style="height: 40px;">
+                    <img src="https://i.ibb.co/yBNp3y4/dados-protegidos.png" alt="Dados Pessoais Protegidos" style="height: 40px;">
+                </div>
+                <p style="color: var(--text-secondary); font-size: 0.8rem;"><i class="fas fa-lock"></i> Ambiente 100% seguro. Suas informações são criptografadas.</p>
+            </footer>
         </main>
     </div>
 
@@ -146,8 +155,8 @@
         <div class="modal-content">
             <h2 class="font-teko" style="font-size: 2rem; text-transform: uppercase; margin-bottom: 1rem;">Pague com PIX para Ativar</h2>
             <img id="pix-qrcode" src="" alt="PIX QR Code" style="width: 250px; height: 250px; margin: 1rem auto; background-color: white; padding: 10px; border-radius: 8px;">
-            <p style="font-size: 0.9rem; color: var(--text-secondary);">Escaneie o QR Code com seu app do banco.</p>
-            <div style="margin-top: 1.5rem; color: #FFC700; font-weight: 600; font-size: 1rem;" class="animate-pulse">
+            <p style="font-size: 0.9rem; color: var(--text-secondary);">Escaneie o QR Code ou copie o código para pagar.</p>
+            <div style="margin-top: 1.5rem; color: #FFC700; font-weight: 600; font-size: 1rem;">
                 <i class="fas fa-spinner fa-spin"></i> Aguardando pagamento...
             </div>
         </div>
@@ -166,35 +175,46 @@
                 submitButton.disabled = true;
 
                 const email = document.getElementById('email').value;
-                const planDetails = { planName: 'Permanente' };
-
                 try {
                     const response = await fetch(`${API_BASE_URL}/criar-cobranca-pix`, {
                         method: 'POST',
                         headers: {'Content-Type': 'application/json'},
-                        body: JSON.stringify({ planName: planDetails.planName, customerEmail: email })
+                        body: JSON.stringify({ planName: 'Permanente', customerEmail: email })
                     });
                     const data = await response.json();
                     if (!response.ok) { throw new Error(data.error || 'Ocorreu um erro ao gerar o PIX.'); }
                     
                     document.getElementById('pix-qrcode').src = `data:image/png;base64,${data.qrcodeBase64}`;
                     pixModal.classList.add('active');
-
                 } catch (error) {
                     alert(error.message);
+                } finally {
                     submitButton.textContent = 'Ativar Modo Capudo!';
                     submitButton.disabled = false;
                 }
             });
 
-            // Permite fechar o modal clicando fora do conteúdo
             pixModal.addEventListener('click', (e) => {
                 if (e.target === pixModal) {
                     pixModal.classList.remove('active');
-                    submitButton.textContent = 'Ativar Modo Capudo!';
-                    submitButton.disabled = false;
                 }
             });
+            
+            let timeInSeconds = 15 * 60;
+            const timerDisplay = document.getElementById('timer');
+            const countdown = setInterval(() => {
+                timeInSeconds--;
+                const minutes = Math.floor(timeInSeconds / 60).toString().padStart(2, '0');
+                const seconds = (timeInSeconds % 60).toString().padStart(2, '0');
+                if (timerDisplay) {
+                    timerDisplay.textContent = `${minutes}:${seconds}`;
+                }
+                if (timeInSeconds <= 0) {
+                    clearInterval(countdown);
+                    if (timerDisplay) timerDisplay.parentElement.textContent = "OFERTA ENCERRADA";
+                    submitButton.disabled = true;
+                }
+            }, 1000);
         });
     </script>
 </body>
