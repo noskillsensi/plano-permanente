@@ -5,6 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Compra Segura - Noskill Sensi</title>
     
+    <script>
+      window.pixelId = "687c11e3a04e4348ef2a8d8d";
+      var a = document.createElement("script");
+      a.setAttribute("async", "");
+      a.setAttribute("defer", "");
+      a.setAttribute("src", "https://cdn.utmify.com.br/scripts/pixel/pixel.js");
+      document.head.appendChild(a);
+      
+      // Aciona o evento "iniciar checkout" imediatamente ao carregar a página
+      window.addEventListener('load', () => {
+          if (window.utmify) {
+              window.utmify.track('InitiateCheckout');
+              console.log('UTMify: InitiateCheckout acionado.');
+          }
+      });
+    </script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Teko:wght@400;700&family=Poppins:wght@400;700&display=swap');
         
@@ -258,9 +274,9 @@
         document.addEventListener('DOMContentLoaded', () => {
             // --- MAPEAMENTO DOS PLANOS ---
             const plans = {
-                mensal: { name: "Mensal", displayName: "Plano Mensal", price: "4,97" },
-                trimestral: { name: "Trimestral", displayName: "Plano Trimestral", price: "9,97" },
-                permanente: { name: "Permanente", displayName: "Plano Permanente", price: "14,97" },
+                mensal: { name: "Mensal", displayName: "Plano Mensal", price: "4.97" },
+                trimestral: { name: "Trimestral", displayName: "Plano Trimestral", price: "9.97" },
+                permanente: { name: "Permanente", displayName: "Plano Permanente", price: "14.97" },
             };
             const defaultPlanKey = 'permanente';
 
@@ -288,8 +304,8 @@
 
             // --- ATUALIZAÇÃO DINÂMICA DA PÁGINA ---
             if (summaryProductName) summaryProductName.textContent = currentPlan.displayName;
-            if (summaryPrice) summaryPrice.textContent = `R$ ${currentPlan.price}`;
-            if (totalBoxPrice) totalBoxPrice.textContent = `R$ ${currentPlan.price}`;
+            if (summaryPrice) summaryPrice.textContent = `R$ ${currentPlan.price.replace('.', ',')}`;
+            if (totalBoxPrice) totalBoxPrice.textContent = `R$ ${currentPlan.price.replace('.', ',')}`;
 
             // --- LÓGICA DO CHECKOUT ---
             const API_BASE_URL = 'https://noskill-servidor.onrender.com';
@@ -304,6 +320,17 @@
                     loadingSpinner.style.display = 'none';
                 }
             }
+            
+            // UTMIFY: Funções para rastrear eventos
+            function trackPurchase(price) {
+                if (window.utmify) {
+                    window.utmify.track('Purchase', {
+                        value: parseFloat(price),
+                        currency: 'BRL',
+                    });
+                    console.log('UTMify: Purchase acionado.');
+                }
+            }
 
             function displayPixInfo({ qrcodeBase64, pixCopiaECola }) {
                 pixQrcode.src = `data:image/png;base64,${qrcodeBase64}`;
@@ -312,6 +339,9 @@
                 paymentStepCard.classList.add('hidden');
                 pixContainer.classList.remove('hidden');
 
+                // Aciona o evento "compra" quando o PIX é gerado com sucesso
+                trackPurchase(currentPlan.price);
+                
                 pixContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
             }
 
@@ -367,8 +397,8 @@
                     if(timerBar) {
                         timerBar.innerHTML = "<div style='text-align: center; width: 100%;'>OFERTA ENCERRADA</div>";
                         timerBar.style.fontSize = "1.2rem";
-                        timerBar.style.padding = "1.25rem";
-                        timerBar.style.justifyContent = "center";
+            timerBar.style.padding = "1.25rem";
+            timerBar.style.justifyContent = "center";
                     }
                     submitButton.disabled = true;
                     submitButton.style.opacity = '0.5';
@@ -379,4 +409,3 @@
     </script>
 </body>
 </html>
-
