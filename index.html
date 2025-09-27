@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finalizar Compra - Noskill Sensi</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Teko:wght@400;700&family=Poppins:wght@400;600&display=swap');
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #121212;
+        }
+        .font-teko {
+            font-family: 'Teko', sans-serif;
+        }
+        .form-input {
+            background-color: #1E1E1E;
+            border: 1px solid #333;
+            color: #FFF;
+        }
+        .form-input:focus {
+            outline: none;
+            border-color: #E53935;
+            box-shadow: 0 0 0 2px rgba(229, 57, 53, 0.5);
+        }
+        .btn-primary {
+            background-color: #E53935;
+            transition: background-color 0.3s ease;
+        }
+        .btn-primary:hover {
+            background-color: #C62828;
+        }
+        .btn-secondary {
+            background-color: #4A5568;
+            transition: background-color 0.3s ease;
+        }
+        .btn-secondary:hover {
+            background-color: #2D3748;
+        }
+        #loading-spinner {
+            border-top-color: #E53935;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center min-h-screen p-4">
+    <div class="w-full max-w-md bg-[#1E1E1E] rounded-2xl shadow-2xl p-8 border border-gray-800">
+        
+        <!-- CABEÇALHO -->
+        <div class="text-center mb-8">
+            <img src="https://i.imgur.com/OfdLSLU.png" alt="Logo Noskill.Sensi" class="mx-auto mb-4 w-32"/>
+            <h1 class="font-teko text-4xl font-bold text-white uppercase">Finalizar Compra</h1>
+            <p class="text-gray-400 text-sm">A sua mira perfeita está a um passo de distância.</p>
+        </div>
+
+        <!-- DIV DE ERRO -->
+        <div id="error-message" class="hidden bg-red-900/50 border border-red-500/30 text-red-300 text-sm p-3 rounded-lg mb-6 text-center"></div>
+
+        <!-- FORMULÁRIO INICIAL -->
+        <div id="checkout-form-container">
+            <div class="mb-6 bg-black/30 p-4 rounded-lg border border-gray-700">
+                <h2 class="font-bold text-lg text-white">Resumo do Pedido</h2>
+                <div class="flex justify-between items-center mt-2">
+                    <span id="plan-name-display" class="text-gray-300">Carregando plano...</span>
+                    <span id="plan-price-display" class="font-bold text-xl text-white">R$ --,--</span>
+                </div>
+            </div>
+
+            <form id="checkout-form">
+                <div class="mb-4">
+                    <label for="email" class="block text-gray-400 text-sm font-bold mb-2">Seu melhor e-mail:</label>
+                    <input type="email" id="email" name="email" class="form-input w-full px-4 py-3 rounded-lg" placeholder="voce@exemplo.com" required>
+                </div>
+                
+                <button type="submit" id="submit-button" class="w-full btn-primary text-white font-bold py-3 px-4 rounded-lg text-lg flex items-center justify-center">
+                    <span id="button-text">Gerar PIX para Pagamento</span>
+                    <div id="loading-spinner" class="hidden w-6 h-6 border-4 border-gray-600 rounded-full animate-spin ml-3"></div>
+                </button>
+            </form>
+             <p class="text-xs text-gray-600 text-center mt-4"><i class="fas fa-lock mr-1"></i> Ambiente 100% seguro. Seus dados estão protegidos.</p>
+        </div>
+
+        <!-- ÁREA DO PIX GERADO -->
+        <div id="pix-container" class="hidden text-center">
+            <h2 class="font-teko text-3xl font-bold text-white uppercase mb-2">Pague com PIX</h2>
+            <p class="text-gray-400 mb-4">Escaneie o QR Code ou use o Copia e Cola.</p>
+            
+            <img id="pix-qrcode" src="" alt="PIX QR Code" class="mx-auto w-64 h-64 bg-white p-2 rounded-lg mb-4 border-4 border-green-500">
+            
+            <div class="bg-black/30 p-3 rounded-lg">
+                <textarea id="pix-copy-paste" class="w-full bg-transparent text-gray-300 text-xs border-none focus:outline-none resize-none" rows="3" readonly></textarea>
+            </div>
+            <button id="copy-button" class="w-full mt-4 btn-secondary text-white font-bold py-3 px-4 rounded-lg">
+                <i class="fas fa-copy mr-2"></i> Copiar Código PIX
+            </button>
+            <p class="text-sm text-yellow-400 mt-6 animate-pulse">Aguardando pagamento... O acesso será enviado para o seu e-mail assim que o pagamento for confirmado.</p>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // =================== ELEMENTOS DO DOM ===================
+            const checkoutFormContainer = document.getElementById('checkout-form-container');
+            const pixContainer = document.getElementById('pix-container');
+            const checkoutForm = document.getElementById('checkout-form');
+            const submitButton = document.getElementById('submit-button');
+            const buttonText = document.getElementById('button-text');
+            const loadingSpinner = document.getElementById('loading-spinner');
+            const errorMessageDiv = document.getElementById('error-message');
+            const pixQrcode = document.getElementById('pix-qrcode');
+            const pixCopyPaste = document.getElementById('pix-copy-paste');
+            const copyButton = document.getElementById('copy-button');
+            const planNameDisplay = document.getElementById('plan-name-display');
+            const planPriceDisplay = document.getElementById('plan-price-display');
+            
+            // =================== CONFIGURAÇÃO ===================
+            // ATENÇÃO: Em produção, mude esta URL para o endereço do seu servidor na Render.
+            const API_BASE_URL = 'https://potential-space-trout-7vxgxrqq4vg9cwrv9-3000.app.github.dev'; 
+
+            // Simulação de dados do plano (em um sistema real, isso viria da página anterior)
+            const planDetails = {
+                planName: 'Permanente',
+                planPrice: '14,97'
+            };
+            
+            // Preenche os detalhes do plano na página
+            if (planNameDisplay && planPriceDisplay) {
+                planNameDisplay.textContent = `Plano ${planDetails.planName}`;
+                planPriceDisplay.textContent = `R$ ${planDetails.planPrice}`;
+            }
+
+            // =================== LÓGICA PRINCIPAL ===================
+            
+            // Função para lidar com o envio do formulário
+            checkoutForm.addEventListener('submit', async (e) => {
+                e.preventDefault(); // Impede o envio padrão do formulário
+                
+                // Exibe o spinner e desabilita o botão
+                setLoading(true);
+                hideError();
+
+                const email = document.getElementById('email').value;
+
+                try {
+                    // Faz a chamada para o nosso backend para criar a cobrança
+                    const response = await fetch(`${API_BASE_URL}/criar-cobranca-pix`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            planName: planDetails.planName,
+                            customerEmail: email
+                        })
+                    });
+
+                    const data = await response.json();
+
+                    if (!response.ok) {
+                        // Se a resposta do servidor não for OK, lança um erro
+                        throw new Error(data.error || 'Ocorreu um erro desconhecido.');
+                    }
+
+                    // Se a cobrança foi criada com sucesso:
+                    displayPixInfo(data);
+
+                } catch (error) {
+                    // Em caso de erro, exibe a mensagem
+                    showError(error.message);
+                    setLoading(false);
+                }
+            });
+
+            // Função para copiar o código PIX
+            copyButton.addEventListener('click', () => {
+                pixCopyPaste.select();
+                document.execCommand('copy');
+                copyButton.innerHTML = '<i class="fas fa-check mr-2"></i> Copiado!';
+                setTimeout(() => {
+                    copyButton.innerHTML = '<i class="fas fa-copy mr-2"></i> Copiar Código PIX';
+                }, 2000);
+            });
+
+
+            // =================== FUNÇÕES AUXILIARES ===================
+
+            function setLoading(isLoading) {
+                if (isLoading) {
+                    loadingSpinner.classList.remove('hidden');
+                    buttonText.textContent = 'Gerando...';
+                    submitButton.disabled = true;
+                } else {
+                    loadingSpinner.classList.add('hidden');
+                    buttonText.textContent = 'Gerar PIX para Pagamento';
+                    submitButton.disabled = false;
+                }
+            }
+
+            function displayPixInfo({ qrcodeBase64, pixCopiaECola }) {
+                pixQrcode.src = `data:image/png;base64,${qrcodeBase64}`;
+                pixCopyPaste.value = pixCopiaECola;
+                checkoutFormContainer.classList.add('hidden');
+                pixContainer.classList.remove('hidden');
+            }
+            
+            function showError(message) {
+                errorMessageDiv.textContent = message;
+                errorMessageDiv.classList.remove('hidden');
+            }
+
+            function hideError() {
+                errorMessageDiv.classList.add('hidden');
+            }
+        });
+    </script>
+</body>
+</html>
+
