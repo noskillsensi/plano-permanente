@@ -56,6 +56,26 @@
             background-color: #1A1A1A;
             border: 1px solid #2C2C2C;
         }
+        .pix-info-card {
+            background-color: #2C2C2C; /* Cor de fundo similar ao do seu exemplo */
+            border-radius: 0.75rem; /* rounded-xl */
+            padding: 1.5rem; /* p-6 */
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* shadow-md */
+        }
+        .pix-detail-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        .pix-detail-item:last-child {
+            margin-bottom: 0;
+        }
+        .pix-detail-icon {
+            width: 1.5rem; /* w-6 */
+            height: 1.5rem; /* h-6 */
+            color: #22C55E; /* text-green-500 */
+            margin-right: 0.75rem; /* mr-3 */
+        }
     </style>
 </head>
 <body class="flex items-center justify-center min-h-screen p-4">
@@ -64,7 +84,7 @@
         <div class="bg-[#1E1E1E] rounded-2xl shadow-2xl p-6 md:p-8 border border-gray-800">
             
             <div class="mb-6">
-                <img src="https://i.ibb.co/L842S0b/banner-50.png" alt="Banner de Oferta" class="w-full rounded-lg shadow-lg">
+                <img src="https://i.ibb.co/3yb2yj9z/JkOe9ya.png" alt="Banner de Oferta" class="w-full rounded-lg shadow-lg">
             </div>
 
             <div class="text-center mb-6">
@@ -84,13 +104,50 @@
             <div id="error-message" class="hidden bg-red-900/50 border border-red-500/30 text-red-300 text-sm p-3 rounded-lg mb-6 text-center"></div>
 
             <div id="checkout-form-container">
+                <div class="pix-info-card mb-6">
+                    <div class="flex items-center mb-4 pb-4 border-b border-gray-600">
+                        <img src="https://i.ibb.co/kskYht3H/pix-svgrepo-com.png" alt="Ícone PIX" class="w-8 h-8 mr-3"/>
+                        <span class="font-teko text-3xl text-white uppercase">PIX</span>
+                    </div>
+
+                    <h2 class="font-bold text-xl text-white mb-4">Pague com PIX</h2>
+                    
+                    <div class="pix-detail-item">
+                        <i class="fas fa-clock pix-detail-icon"></i>
+                        <div>
+                            <p class="font-semibold text-white">Transferência Instantânea</p>
+                            <p class="text-gray-400 text-sm">Sua compra é confirmada em segundos, sem esperas.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="pix-detail-item">
+                        <i class="fas fa-qrcode pix-detail-icon"></i>
+                        <div>
+                            <p class="font-semibold text-white">Praticidade Máxima</p>
+                            <p class="text-gray-400 text-sm">Escaneie o QR code ou copie o código PIX. Pronto!</p>
+                        </div>
+                    </div>
+
+                    <div class="pix-detail-item">
+                        <i class="fas fa-shield-alt pix-detail-icon"></i>
+                        <div>
+                            <p class="font-semibold text-white">Segurança Garantida</p>
+                            <p class="text-gray-400 text-sm">Tecnologia do Banco Central para sua tranquilidade.</p>
+                        </div>
+                    </div>
+
+                    <div class="flex justify-between items-center mt-6 pt-4 border-t border-gray-600">
+                        <span class="text-gray-300 text-lg">Total a pagar:</span>
+                        <span id="total-price-display" class="font-bold text-2xl text-white">R$ 14,97</span>
+                    </div>
+                </div>
+                
                 <form id="checkout-form">
                     <div class="mb-4">
                         <label for="email" class="block text-gray-400 text-sm font-bold mb-2">Seu melhor e-mail:</label>
                         <input type="email" id="email" name="email" class="form-input w-full px-4 py-3 rounded-lg text-lg" placeholder="voce@exemplo.com" required>
                     </div>
                     
-                    <p class="text-center font-teko text-2xl text-green-400 uppercase mb-2">Pagamento Seguro via PIX</p>
                     <button type="submit" id="submit-button" class="w-full btn-primary text-white font-bold py-3 px-4 rounded-lg text-2xl flex items-center justify-center">
                         <span id="button-text">ATIVAR MODO CAPUDO!</span>
                         <div id="loading-spinner" class="hidden w-6 h-6 border-4 border-gray-600 rounded-full animate-spin ml-3"></div>
@@ -122,7 +179,7 @@
             <h3 class="font-teko text-3xl font-bold text-white uppercase text-center">Aprovado por quem joga sério</h3>
 
             <div class="testimonial-card rounded-xl p-4 flex items-start space-x-4">
-                <img src="https://i.ibb.co/d0cmxVv/vini.png" alt="Vini" class="w-16 h-16 rounded-full border-2 border-gray-700">
+                <img src="https://i.ibb.co/gFXspMyh/PhG2IKb.jpg" alt="Vini" class="w-16 h-16 rounded-full border-2 border-gray-700">
                 <div class="flex-1">
                     <div class="flex justify-between items-center">
                         <h4 class="font-bold text-white">Vini</h4>
@@ -135,7 +192,7 @@
             </div>
 
             <div class="testimonial-card rounded-xl p-4 flex items-start space-x-4">
-                <img src="https://i.ibb.co/Vvz7z1r/gabriel.png" alt="Gabrielxs" class="w-16 h-16 rounded-full border-2 border-gray-700">
+                <img src="https://i.ibb.co/BVcvWbQm/98fHgVA.jpg" alt="Gabrielxs" class="w-16 h-16 rounded-full border-2 border-gray-700">
                 <div class="flex-1">
                     <div class="flex justify-between items-center">
                         <h4 class="font-bold text-white">Gabrielxs</h4>
@@ -148,7 +205,7 @@
             </div>
 
             <div class="testimonial-card rounded-xl p-4 flex items-start space-x-4">
-                <img src="https://i.ibb.co/Wc4M9gH/lipe2x.png" alt="Lipe2x" class="w-16 h-16 rounded-full border-2 border-gray-700">
+                <img src="https://i.ibb.co/ynv9hg12/L9rQBAb.jpg" alt="Lipe2x" class="w-16 h-16 rounded-full border-2 border-gray-700">
                 <div class="flex-1">
                     <div class="flex justify-between items-center">
                         <h4 class="font-bold text-white">Lipe2x</h4>
@@ -178,6 +235,7 @@
             const copyButton = document.getElementById('copy-button');
             const planNameDisplay = document.getElementById('plan-name-display');
             const planPriceDisplay = document.getElementById('plan-price-display');
+            const totalPriceDisplay = document.getElementById('total-price-display'); // Novo elemento
             
             // =================== CONFIGURAÇÃO ===================
             const API_BASE_URL = 'https://potential-space-trout-7vxgxrqq4vg9cwrv9-3000.app.github.dev'; 
@@ -190,6 +248,7 @@
             if (planNameDisplay && planPriceDisplay) {
                 planNameDisplay.textContent = `Plano ${planDetails.planName}`;
                 planPriceDisplay.textContent = `R$ ${planDetails.planPrice}`;
+                totalPriceDisplay.textContent = `R$ ${planDetails.planPrice}`; // Atualiza o total na seção PIX
             }
 
             // =================== LÓGICA PRINCIPAL ===================
