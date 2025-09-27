@@ -1,50 +1,58 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <!-- Define o pixel ID antes do script -->
+  <!-- Define o Pixel ID antes de carregar o script -->
   <script>
     window.pixelId = "687c11e3a04e4348ef2a8d8d";
   </script>
   <script async defer src="https://cdn.utmify.com.br/scripts/pixel/pixel.js"></script>
 
   <script>
-    // Função para disparar eventos do pixel
+    // Função para disparar eventos do pixel UTMify com fallback
     function trackUtmifyEvent(eventName, eventData = {}) {
       const interval = setInterval(() => {
-        if (window.utmify && typeof utmify.track === 'function') {
+        if (window.utmify && typeof utmify.track === "function") {
           utmify.track(eventName, eventData);
-          console.log(`Evento enviado para UTMify: ${eventName}`, eventData);
+          console.log(`✅ Evento enviado para UTMify: ${eventName}`, eventData);
           clearInterval(interval);
         }
       }, 300);
+      // Para de tentar depois de 8s
       setTimeout(() => clearInterval(interval), 8000);
     }
 
-    // Dispara InitiateCheckout assim que a página estiver pronta
-    document.addEventListener('DOMContentLoaded', () => {
-      trackUtmifyEvent('InitiateCheckout');
+    // Dispara InitiateCheckout assim que a página estiver carregada
+    document.addEventListener("DOMContentLoaded", () => {
+      trackUtmifyEvent("InitiateCheckout");
     });
 
-    // Quando o QR Code PIX for gerado, dispara o evento Purchase
+    // Exemplo de função de geração de PIX
     async function generatePIX() {
-      const response = await fetch("/api/generate-pix");
-      const data = await response.json();
+      try {
+        const response = await fetch("/api/generate-pix");
+        const data = await response.json();
 
-      if (data.qrCode) {
-        // Mostra o QR Code na tela
-        document.querySelector("#pix-qrcode").src = data.qrCode;
+        if (data.qrCode) {
+          // Exibe o QR Code
+          document.querySelector("#pix-qrcode").src = data.qrCode;
 
-        // Dispara evento de compra
-        const eventData = {
-          transactionId: data.txid,
-          value: data.amount,
-          currency: "BRL",
-          paymentMethod: "PIX"
-        };
-        trackUtmifyEvent('Purchase', eventData);
+          // Dispara o evento de compra
+          const eventData = {
+            transactionId: data.txid || "",
+            value: data.amount || 0,
+            currency: "BRL",
+            paymentMethod: "PIX"
+          };
+          trackUtmifyEvent("Purchase", eventData);
+        } else {
+          console.error("❌ Erro: resposta do servidor não contém QR Code.");
+        }
+      } catch (err) {
+        console.error("❌ Erro ao gerar PIX:", err);
       }
     }
   </script>
+
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Teko:wght@400;700&family=Poppins:wght@400;700&display=swap');
         
