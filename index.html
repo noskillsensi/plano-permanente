@@ -13,12 +13,20 @@
       a.setAttribute("src", "https://cdn.utmify.com.br/scripts/pixel/pixel.js");
       document.head.appendChild(a);
       
-      // Aciona o evento "iniciar checkout" imediatamente ao carregar a página
+      // Nova função para esperar o pixel carregar
+      function trackEvent(eventName, eventData) {
+          const checkUtmify = setInterval(() => {
+              if (window.utmify) {
+                  window.utmify.track(eventName, eventData);
+                  console.log(`UTMify: ${eventName} acionado.`);
+                  clearInterval(checkUtmify);
+              }
+          }, 100); // Tenta a cada 100ms
+      }
+
+      // Aciona o evento "iniciar checkout" ao carregar a página
       window.addEventListener('load', () => {
-          if (window.utmify) {
-              window.utmify.track('InitiateCheckout');
-              console.log('UTMify: InitiateCheckout acionado.');
-          }
+          trackEvent('InitiateCheckout');
       });
     </script>
     <style>
@@ -323,13 +331,11 @@
             
             // UTMIFY: Funções para rastrear eventos
             function trackPurchase(price) {
-                if (window.utmify) {
-                    window.utmify.track('Purchase', {
-                        value: parseFloat(price),
-                        currency: 'BRL',
-                    });
-                    console.log('UTMify: Purchase acionado.');
-                }
+                const eventData = {
+                    value: parseFloat(price),
+                    currency: 'BRL',
+                };
+                trackEvent('Purchase', eventData);
             }
 
             function displayPixInfo({ qrcodeBase64, pixCopiaECola }) {
