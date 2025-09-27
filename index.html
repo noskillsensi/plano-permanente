@@ -117,11 +117,11 @@
                 <div class="order-summary">
                     <img src="https://i.ibb.co/dwmcHL3T/aOplo9H.png" alt="Logo Noskill Sensi">
                     <div>
-                        <p style="font-weight: 700; font-size: 1.125rem;">Aplicativo Noskill</p>
+                        <p id="summary-product-name" style="font-weight: 700; font-size: 1.125rem;">Plano Permanente</p>
                         <p class="pix-info">Pagamento via PIX</p>
                         <div class="price-anchor">
                             <span class="original">R$ 29,97</span>
-                            <p class="current">R$ 14,97</p>
+                            <p id="summary-price" class="current">R$ 14,97</p>
                         </div>
                     </div>
                 </div>
@@ -175,7 +175,7 @@
                         <hr style="margin: 1.5rem 0;">
                         <div class="total-box">
                             <span>Total a pagar:</span>
-                            <span class="price">R$ 14,97</span>
+                            <span id="total-box-price" class="price">R$ 14,97</span>
                         </div>
                         <button type="submit" id="submit-button" class="btn-cta">
                             <span id="button-text">ATIVAR MODO CAPUDO!</span>
@@ -256,6 +256,20 @@
     
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            // --- MAPEAMENTO DOS PLANOS ---
+            const plans = {
+                mensal: { name: "Mensal", displayName: "Plano Mensal", price: "4,97" },
+                trimestral: { name: "Trimestral", displayName: "Plano Trimestral", price: "9,97" },
+                permanente: { name: "Permanente", displayName: "Plano Permanente", price: "14,97" },
+            };
+            const defaultPlanKey = 'permanente';
+
+            // --- LEITURA DO PARÂMETRO DA URL ---
+            const urlParams = new URLSearchParams(window.location.search);
+            const selectedPlanKey = urlParams.get('plan') || defaultPlanKey;
+            const currentPlan = plans[selectedPlanKey] || plans[defaultPlanKey];
+
+            // --- ELEMENTOS DO DOM ---
             const checkoutForm = document.getElementById('checkout-form');
             const paymentStepCard = document.getElementById('payment-step-card');
             const pixContainer = document.getElementById('pix-container');
@@ -268,6 +282,16 @@
             const timerDisplay = document.getElementById('timer');
             const timerBar = document.getElementById('timer-bar');
             
+            const summaryProductName = document.getElementById('summary-product-name');
+            const summaryPrice = document.getElementById('summary-price');
+            const totalBoxPrice = document.getElementById('total-box-price');
+
+            // --- ATUALIZAÇÃO DINÂMICA DA PÁGINA ---
+            if (summaryProductName) summaryProductName.textContent = currentPlan.displayName;
+            if (summaryPrice) summaryPrice.textContent = `R$ ${currentPlan.price}`;
+            if (totalBoxPrice) totalBoxPrice.textContent = `R$ ${currentPlan.price}`;
+
+            // --- LÓGICA DO CHECKOUT ---
             const API_BASE_URL = 'https://noskill-servidor.onrender.com';
 
             function setLoading(isLoading) {
@@ -302,7 +326,11 @@
                     const response = await fetch(`${API_BASE_URL}/criar-cobranca-pix`, {
                         method: 'POST',
                         headers: {'Content-Type': 'application/json'},
-                        body: JSON.stringify({ planName: 'Permanente', customerEmail: email, customerName: name })
+                        body: JSON.stringify({
+                            planName: currentPlan.name,
+                            customerEmail: email,
+                            customerName: name
+                        })
                     });
 
                     const data = await response.json();
@@ -326,6 +354,7 @@
                 });
             });
             
+            // LÓGICA DO CRONÔMETRO
             let timeInSeconds = 15 * 60;
             const countdown = setInterval(() => {
                 timeInSeconds--;
@@ -350,3 +379,4 @@
     </script>
 </body>
 </html>
+
