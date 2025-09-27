@@ -7,21 +7,21 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Teko:wght@400;700&family=Poppins:wght@400;600&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Teko:wght@400;700&family=Poppins:wght@400;700&display=swap');
         
         /* --- ESTILOS GERAIS E RESET --- */
         *,:after,:before{box-sizing:border-box;border:0 solid #e5e7eb}
         html{line-height:1.5;-webkit-text-size-adjust:100%;tab-size:4;font-family:'Poppins',sans-serif}
         body{margin:0;line-height:inherit;background-color:#121212;color:#FFF}
-        h1,h2,p{margin:0}
+        h1,h2,p,ul,li{margin:0; padding:0; line-height: 1.4;} /* AJUSTE DE LINE-HEIGHT */
         img{display:block;vertical-align:middle;max-width:100%;height:auto}
         button,input,textarea{font-family:inherit;font-size:100%;font-weight:inherit;line-height:inherit;color:inherit;margin:0;padding:0;background-color:transparent;background-image:none;}
         textarea{resize:vertical}
         button{cursor:pointer}
         
         /* --- ESTRUTURA E LAYOUT --- */
-        .container { max-width: 500px; margin: 0 auto; padding: 1rem; }
-        .card { background-color: #1E1E1E; border: 1px solid #333; border-radius: 0.75rem; padding: 1.5rem; margin-bottom: 1.5rem; }
+        .container { max-width: 470px; margin: 0 auto; padding: 0 1rem 1rem 1rem; } /* AJUSTE DE MAX-WIDTH */
+        .card { background-color: #1E1E1E; border: 1px solid #333; border-radius: 0.75rem; padding: 1.25rem; margin-bottom: 1.5rem; } /* AJUSTE DE PADDING */
         .sticky-bar { background-color: #E53935; text-align: center; padding: 0.75rem; font-weight: 700; position: sticky; top: 0; z-index: 50; display: flex; align-items: center; justify-content: center; gap: 0.5rem; }
         
         /* --- TIPOGRAFIA --- */
@@ -30,12 +30,12 @@
         h2.card-title { font-family: 'Teko', sans-serif; text-transform: uppercase; font-size: 1.5rem; margin-bottom: 1rem; }
         
         /* --- COMPONENTES --- */
-        .banner { width: 100%; border-radius: 0.5rem; margin-bottom: 1.5rem; }
+        .banner { width: 100%; border-radius: 0.5rem; margin: 1rem 0 1.5rem 0; }
         .form-input { background-color: #2A2A2A; border: 1px solid #4B4B4B; color: #FFF; width: 100%; padding: 0.75rem 1rem; border-radius: 0.5rem; }
         .form-input:focus { outline: none; border-color: #E53935; box-shadow: 0 0 0 2px rgba(229, 57, 53, 0.5); }
         .btn-cta { background-color: #E53935; transition: background-color 0.3s ease; width: 100%; color: #FFF; font-family: 'Teko', sans-serif; font-size: 1.75rem; font-weight: 700; padding: 0.75rem; border-radius: 0.5rem; display: flex; align-items: center; justify-content: center; gap: 0.5rem; letter-spacing: 0.05em; }
         .btn-cta:hover { background-color: #C62828; }
-        #loading-spinner { display: none; width: 1.5rem; height: 1.5rem; border: 3px solid rgba(255,255,255,0.3); border-top-color: #FFF; border-radius: 50%; animation: spin 1s linear infinite; margin-left: 0.75rem; }
+        #loading-spinner { display: none; width: 1.5rem; height: 1.5rem; border: 3px solid rgba(255,255,255,0.3); border-top-color: #FFF; border-radius: 50%; animation: spin 1s linear infinite; }
         @keyframes spin { to { transform: rotate(360deg); } }
         
         /* --- BLOCOS ESPECÍFICOS --- */
@@ -46,18 +46,26 @@
         .pix-payment-box { background-color: #242424; border-radius: 0.5rem; padding: 1rem; margin-bottom: 1.5rem; }
         .pix-payment-box .header { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem; }
         .pix-payment-box .header span { font-weight: 700; font-size: 1.125rem; }
-        .pix-payment-box .benefits { font-size: 0.875rem; color: #d1d5db; display: flex; flex-direction: column; gap: 0.25rem; }
-        .pix-payment-box .benefits svg { width: 16px; height: 16px; color: #22c55e; margin-right: 0.5rem; }
-        .feedback { display: flex; flex-direction: column; gap: 1rem; }
-        .feedback-item { display: flex; align-items: center; gap: 0.75rem; }
+        .pix-payment-box .benefits { font-size: 0.875rem; color: #d1d5db; display: flex; flex-direction: column; gap: 0.5rem; } /* AJUSTE DE GAP */
+        .pix-payment-box .benefits p { display:flex; align-items:center; }
+        .pix-payment-box .benefits svg { width: 16px; height: 16px; color: #22c55e; margin-right: 0.5rem; flex-shrink: 0; }
+        .feedback { display: flex; flex-direction: column; gap: 1.25rem; } /* AJUSTE DE GAP */
+        .feedback-item .header { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.5rem;}
         .feedback-item img { width: 40px; height: 40px; border-radius: 50%; }
         .feedback-item .stars { color: #facc15; font-size: 0.75rem; }
         .feedback-item p { font-size: 0.875rem; color: #d1d5db; }
-        .guarantees { display: flex; flex-direction: column; gap: 1rem; list-style: none; padding: 0; }
+        .guarantees { display: flex; flex-direction: column; gap: 1rem; list-style: none; }
         .guarantees li { display: flex; align-items: center; gap: 0.75rem; font-size: 0.875rem; }
         .guarantees svg { width: 24px; height: 24px; color: #22c55e; flex-shrink: 0; }
         .footer-badges { display: flex; justify-content: center; gap: 1rem; margin-top: 1.5rem; }
         .footer-badges img { height: 40px; }
+        hr.divider { border: none; border-top: 1px solid #333; margin: 0; }
+
+        /* --- MODAL --- */
+        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.8); z-index: 100; align-items: center; justify-content: center; }
+        .modal-content { background-color: #1E1E1E; padding: 2rem; border-radius: 0.75rem; border: 1px solid #333; text-align: center; width: 90%; max-width: 380px; }
+        #pix-qrcode { margin: 1rem auto; background-color: white; padding: 0.5rem; border-radius: 0.5rem; }
+        .btn-close-modal { background-color: #4A5568; margin-top: 1.5rem; width: 100%; padding: 0.75rem; border-radius: 0.5rem; font-weight: 700; }
     </style>
 </head>
 <body>
@@ -78,7 +86,7 @@
                 <div class="order-summary">
                     <img src="https://i.ibb.co/dwmcHL3T/aOplo9H.png" alt="Logo Noskill Sensi">
                     <div>
-                        <p class="font-bold">Aplicativo Noskill</p>
+                        <p class="font-bold text-lg">Aplicativo Noskill</p>
                         <div class="price-anchor">
                             <span class="original">R$ 29,97</span>
                             <p class="current">R$ 14,97</p>
@@ -125,22 +133,26 @@
             <h2 class="card-title text-center">Aprovado pela Comunidade</h2>
             <div class="feedback">
                 <div class="feedback-item">
-                    <img src="https://i.ibb.co/gFXspMyh/PhG2IKb.jpg" alt="Avatar Vini">
-                    <div>
-                        <p class="font-bold">Vini</p>
-                        <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <div class="header">
+                        <img src="https://i.ibb.co/gFXspMyh/PhG2IKb.jpg" alt="Avatar Vini">
+                        <div>
+                            <p class="font-bold">Vini</p>
+                            <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                        </div>
                     </div>
+                    <p>"Pensei que ia ser mó trampo pra instalar, chegou o link no e-mail, instalei e já era. Em 2 minutos eu já tava amassando na rank, bglh simples e direto"</p>
                 </div>
-                <p>"Pensei que ia ser mó trampo pra instalar... bglh simples e direto"</p>
-                <hr style="border-color: #333;">
+                <hr class="divider">
                 <div class="feedback-item">
-                    <img src="https://i.ibb.co/BVcvWbQm/98fHgVA.jpg" alt="Avatar Gabrielxs">
-                    <div>
-                        <p class="font-bold">Gabrielxs</p>
-                        <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                     <div class="header">
+                        <img src="https://i.ibb.co/BVcvWbQm/98fHgVA.jpg" alt="Avatar Gabrielxs">
+                        <div>
+                            <p class="font-bold">Gabrielxs</p>
+                            <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                        </div>
                     </div>
+                    <p>"pprt depois que instalei parece que tô xitado kkkk a mira não pina mais, só vermelho. A 2x automática é a mais gostosa do jogo, podem comprar sem medo"</p>
                 </div>
-                <p>"pprt depois que instalei parece que tô xitado... podem comprar sem medo"</p>
             </div>
         </div>
 
@@ -158,29 +170,91 @@
         </div>
     </div>
 
+    <div id="pix-modal" class="modal-overlay">
+        <div class="modal-content">
+            <h2 class="card-title">Pague com PIX para Ativar</h2>
+            <img id="pix-qrcode" src="" alt="PIX QR Code">
+            <p class="text-sm text-yellow-400 mt-4 animate-pulse">Aguardando pagamento...</p>
+            <button id="close-modal-button" class="btn-close-modal">Fechar</button>
+        </div>
+    </div>
+    
     <script>
-        // O seu JavaScript original pode ser mantido aqui, pois a estrutura do formulário e os IDs não foram alterados.
-        // Apenas lembre-se de ajustar o seletor do spinner para exibir/ocultar corretamente.
-        document.getElementById('checkout-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const btn = document.getElementById('submit-button');
-            const btnText = document.getElementById('button-text');
-            const spinner = document.getElementById('loading-spinner');
+        document.addEventListener('DOMContentLoaded', () => {
+            // ELEMENTOS DO DOM
+            const checkoutForm = document.getElementById('checkout-form');
+            const submitButton = document.getElementById('submit-button');
+            const buttonText = document.getElementById('button-text');
+            const loadingSpinner = document.getElementById('loading-spinner');
+            const pixModal = document.getElementById('pix-modal');
+            const closeModalButton = document.getElementById('close-modal-button');
+            const timerDisplay = document.getElementById('timer');
+            const pixQrcodeImg = document.getElementById('pix-qrcode');
             
-            btn.disabled = true;
-            btnText.style.display = 'none';
-            spinner.style.display = 'block';
+            // CONFIGURAÇÃO
+            const API_BASE_URL = 'https://noskill-servidor.onrender.com';
 
-            // Simulação da chamada de API
-            setTimeout(() => {
-                // Aqui entraria a sua lógica de fetch para a API
-                // e a exibição do modal do PIX
-                
-                // Reset do botão após a operação
-                btn.disabled = false;
-                btnText.style.display = 'inline';
-                spinner.style.display = 'none';
-            }, 2000);
+            // FUNÇÕES AUXILIARES
+            function setLoading(isLoading) {
+                if (isLoading) {
+                    loadingSpinner.style.display = 'block';
+                    buttonText.style.display = 'none';
+                    submitButton.disabled = true;
+                } else {
+                    loadingSpinner.style.display = 'none';
+                    buttonText.style.display = 'inline';
+                    submitButton.disabled = false;
+                }
+            }
+
+            // LÓGICA PRINCIPAL
+            checkoutForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                setLoading(true);
+
+                const name = document.getElementById('name').value;
+                const email = document.getElementById('email').value;
+
+                try {
+                    const response = await fetch(`${API_BASE_URL}/criar-cobranca-pix`, {
+                        method: 'POST',
+                        headers: {'Content-Type': 'application/json'},
+                        body: JSON.stringify({ planName: 'Permanente', customerEmail: email, customerName: name })
+                    });
+
+                    const data = await response.json();
+                    if (!response.ok) { throw new Error(data.error || 'Ocorreu um erro desconhecido.'); }
+
+                    pixQrcodeImg.src = `data:image/png;base64,${data.qrcodeBase64}`;
+                    pixModal.style.display = 'flex';
+
+                } catch (error) {
+                    alert(error.message);
+                } finally {
+                    setLoading(false);
+                }
+            });
+
+            closeModalButton.addEventListener('click', () => {
+                pixModal.style.display = 'none';
+            });
+            
+            // LÓGICA DO CRONÔMETRO
+            let timeInSeconds = 15 * 60;
+            const countdown = setInterval(() => {
+                timeInSeconds--;
+                const minutes = Math.floor(timeInSeconds / 60).toString().padStart(2, '0');
+                const seconds = (timeInSeconds % 60).toString().padStart(2, '0');
+                if(timerDisplay) timerDisplay.textContent = `${minutes}:${seconds}`;
+
+                if (timeInSeconds <= 0) {
+                    clearInterval(countdown);
+                    if(timerDisplay) timerDisplay.parentElement.innerHTML = "OFERTA ENCERRADA";
+                    submitButton.disabled = true;
+                    submitButton.style.opacity = '0.5';
+                    submitButton.style.cursor = 'not-allowed';
+                }
+            }, 1000);
         });
     </script>
 </body>
