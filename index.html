@@ -25,9 +25,8 @@
         .sticky-bar { background-color: #E53935; text-align: center; padding: 0.75rem; font-weight: 700; position: sticky; top: 0; z-index: 50; display: flex; align-items: center; justify-content: center; gap: 0.5rem; }
         
         /* --- TIPOGRAFIA --- */
-        .font-teko { font-family: 'Teko', sans-serif; }
         h1.main-title { font-family: 'Teko', sans-serif; text-transform: uppercase; font-size: 2.25rem; letter-spacing: 0.05em; text-align: center; margin-bottom: 1.5rem; }
-        h2.card-title { font-family: 'Teko', sans-serif; text-transform: uppercase; font-size: 1.5rem; margin-bottom: 1rem; display: flex; align-items: center; }
+        h2.card-title { font-family: 'Teko', sans-serif; text-transform: uppercase; font-size: 1.5rem; margin-bottom: 1.5rem; display: flex; align-items: center; }
         
         /* --- COMPONENTES --- */
         .banner { width: 100%; border-radius: 0.5rem; margin: 1rem 0 1.5rem 0; }
@@ -40,29 +39,35 @@
         
         /* --- BLOCOS ESPECÍFICOS --- */
         .order-summary { display: flex; align-items: center; gap: 1rem; }
-        .order-summary img { width: 64px; height: 64px; border-radius: 0.5rem; object-fit: contain; } /* <-- CORREÇÃO DA IMAGEM */
+        .order-summary img { width: 64px; height: 64px; border-radius: 0.5rem; object-fit: contain; }
         .price-anchor .original { text-decoration: line-through; color: #9ca3af; font-size: 0.875rem; }
         .price-anchor .current { color: #22c55e; font-size: 1.5rem; font-weight: 700; }
-        .step-number { display: inline-flex; align-items: center; justify-content: center; width: 24px; height: 24px; border: 2px solid #E53935; border-radius: 50%; color: #FFF; font-weight: 700; font-size: 1rem; margin-right: 0.75rem; } /* <-- ESTILO DAS ETAPAS */
-        .pix-payment-box { background-color: #242424; border-radius: 0.5rem; padding: 1rem; margin-bottom: 1.5rem; }
+        
+        /* NÚMEROS DAS ETAPAS - NOVO ESTILO */
+        .step-number { display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; background-color: #E53935; border-radius: 50%; color: #FFF; font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 1rem; margin-right: 0.75rem; line-height: 1; }
+        
+        /* EFEITO DE CAMADAS / CARD ANINHADO */
+        .nested-card { background-color: #2A2A2A; border-radius: 0.5rem; padding: 1rem; }
+        
         .pix-payment-box .header { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.25rem; }
         .pix-payment-box .header span { font-weight: 700; font-size: 1.125rem; }
-        .pix-payment-box .header img { height: 32px; width: auto; } /* <-- ESTILO DO ÍCONE PIX */
+        .pix-payment-box .header img { height: 32px; width: auto; }
         .pix-payment-box .benefits { display: flex; flex-direction: column; gap: 0.75rem; }
-        .pix-payment-box .benefits p { display:flex; align-items:center; font-size: 0.95rem; padding-bottom: 0.75rem; border-bottom: 1px solid #333; } /* <-- ESTILO DOS BENEFÍCIOS */
+        .pix-payment-box .benefits p { display:flex; align-items:center; font-size: 0.95rem; padding-bottom: 0.75rem; border-bottom: 1px solid #3c3c3c; }
         .pix-payment-box .benefits p:last-child { border-bottom: none; padding-bottom: 0; }
         .pix-payment-box .benefits svg { width: 16px; height: 16px; color: #22c55e; margin-right: 0.5rem; flex-shrink: 0; }
-        .feedback { display: flex; flex-direction: column; gap: 1.25rem; }
+        
+        .feedback { display: flex; flex-direction: column; gap: 1rem; }
         .feedback-item .header { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.5rem;}
         .feedback-item img { width: 40px; height: 40px; border-radius: 50%; }
         .feedback-item .stars { color: #facc15; font-size: 0.75rem; }
-        .feedback-item p { font-size: 0.875rem; color: #d1d5db; }
+        .feedback-item .content { font-size: 0.875rem; color: #d1d5db; }
+        
         .guarantees { display: flex; flex-direction: column; gap: 1rem; list-style: none; }
         .guarantees li { display: flex; align-items: center; gap: 0.75rem; font-size: 0.875rem; }
         .guarantees svg { width: 24px; height: 24px; color: #22c55e; flex-shrink: 0; }
         .footer-badges { display: flex; justify-content: center; gap: 1rem; margin-top: 1.5rem; }
         .footer-badges img { height: 40px; }
-        hr.divider { border: none; border-top: 1px solid #333; margin: 0; }
 
         /* --- MODAL --- */
         .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.8); z-index: 100; align-items: center; justify-content: center; }
@@ -113,7 +118,7 @@
                 
                 <div class="card">
                     <h2 class="card-title"><span class="step-number">2</span>Pagamento</h2>
-                    <div class="pix-payment-box">
+                    <div class="pix-payment-box nested-card">
                         <div class="header">
                             <img src="https://i.ibb.co/kskYht3H/pix-svgrepo-com.png" alt="Ícone PIX">
                             <span>Pagamento seguro via PIX</span>
@@ -133,39 +138,37 @@
         </div>
         
         <div class="card">
-            <h2 class="card-title text-center" style="justify-content: center;">Aprovado pela Comunidade</h2>
+            <h2 class="card-title" style="justify-content: center;">Aprovado pela Comunidade</h2>
             <div class="feedback">
-                <div class="feedback-item">
+                <div class="feedback-item nested-card">
                     <div class="header">
                         <img src="https://i.ibb.co/gFXspMyh/PhG2IKb.jpg" alt="Avatar Vini">
                         <div>
-                            <p class="font-bold">Vini</p>
+                            <p class="font-bold text-white">Vini</p>
                             <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
                         </div>
                     </div>
-                    <p>"Pensei que ia ser mó trampo pra instalar, chegou o link no e-mail, instalei e já era. Em 2 minutos eu já tava amassando na rank, bglh simples e direto"</p>
+                    <p class="content">"Pensei que ia ser mó trampo pra instalar, chegou o link no e-mail, instalei e já era. Em 2 minutos eu já tava amassando na rank, bglh simples e direto"</p>
                 </div>
-                <hr class="divider">
-                <div class="feedback-item">
+                <div class="feedback-item nested-card">
                      <div class="header">
                         <img src="https://i.ibb.co/BVcvWbQm/98fHgVA.jpg" alt="Avatar Gabrielxs">
                         <div>
-                            <p class="font-bold">Gabrielxs</p>
+                            <p class="font-bold text-white">Gabrielxs</p>
                             <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
                         </div>
                     </div>
-                    <p>"pprt depois que instalei parece que tô xitado kkkk a mira não pina mais, só vermelho. A 2x automática é a mais gostosa do jogo, podem comprar sem medo"</p>
+                    <p class="content">"pprt depois que instalei parece que tô xitado kkkk a mira não pina mais, só vermelho. A 2x automática é a mais gostosa do jogo, podem comprar sem medo"</p>
                 </div>
-                <hr class="divider">
-                <div class="feedback-item">
+                <div class="feedback-item nested-card">
                      <div class="header">
                         <img src="https://i.ibb.co/ynv9hg12/L9rQBAb.jpg" alt="Avatar Lipe2x">
                         <div>
-                            <p class="font-bold">Lipe2x</p>
+                            <p class="font-bold text-white">Lipe2x</p>
                             <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
                         </div>
                     </div>
-                    <p>"O mais foda é que o app tá sempre atualizado pra nova temporada. Comprei o vitalício e não me preocupo mais. As funções é só ligar e pronto, a mágica acontece confia"</p>
+                    <p class="content">"O mais foda é que o app tá sempre atualizado pra nova temporada. Comprei o vitalício e não me preocupo mais. As funções é só ligar e pronto, a mágica acontece confia"</p>
                 </div>
             </div>
         </div>
