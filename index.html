@@ -239,3 +239,137 @@
     </script>
 </body>
 </html>
+                </button>
+                 <p class="text-sm text-yellow-400 text-center mt-6 animate-pulse">Aguardando pagamento...</p>
+            </div>
+        </div>
+        
+        <div class="mt-6 bg-[#1E1E1E] p-6 rounded-lg border border-gray-700 space-y-6">
+             <h2 class="text-lg font-bold border-l-4 border-red-500 pl-3">Aprovado pela Comunidade</h2>
+             <div class="text-sm">
+                <div class="flex items-center mb-2">
+                    <img src="https://i.ibb.co/JFbX4Rng/vini.png" alt="Avatar Vini" class="w-10 h-10 rounded-full mr-3">
+                    <div>
+                        <p class="font-bold text-white">Vini</p>
+                        <div class="text-yellow-400"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    </div>
+                </div>
+                <p class="text-gray-300">"Pensei que ia ser mó trampo pra instalar, chegou o link no e-mail, instalei e já era. Em 2 minutos eu já tava amassando na rank, bglh simples e direto"</p>
+             </div>
+             <div class="text-sm">
+                <div class="flex items-center mb-2">
+                    <img src="https://i.ibb.co/1fygsR5c/gabriel.png" alt="Avatar Gabrielxs" class="w-10 h-10 rounded-full mr-3">
+                    <div>
+                        <p class="font-bold text-white">Gabrielxs</p>
+                        <div class="text-yellow-400"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    </div>
+                </div>
+                <p class="text-gray-300">"pprt depois que instalei parece que tô xitado kkkk a mira não pina mais, só vermelho. A 2x automática é a mais gostosa do jogo, podem comprar sem medo"</p>
+             </div>
+             <div class="text-sm">
+                <div class="flex items-center mb-2">
+                    <img src="https://i.ibb.co/7JjBMPZH/lipe2x.png" alt="Avatar Lipe2x" class="w-10 h-10 rounded-full mr-3">
+                    <div>
+                        <p class="font-bold text-white">Lipe2x</p>
+                        <div class="text-yellow-400"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    </div>
+                </div>
+                <p class="text-gray-300">"O mais foda é que o app tá sempre atualizado pra nova temporada. Comprei o vitalício e não me preocupo mais. As funções é só ligar e pronto, a mágica acontece confia"</p>
+             </div>
+        </div>
+
+        <div class="mt-6 bg-[#1E1E1E] p-6 rounded-lg border border-gray-700">
+            <ul class="space-y-4 text-gray-300">
+                <li class="flex items-center"><i class="fas fa-shield-halved text-green-500 w-6 text-center mr-3"></i> <span><strong class="text-white">Dados protegidos:</strong> Suas informações são confidenciais.</span></li>
+                <li class="flex items-center"><i class="fas fa-lock text-green-500 w-6 text-center mr-3"></i> <span><strong class="text-white">Pagamento 100% Seguro:</strong> Todas as transações são criptografadas.</span></li>
+                <li class="flex items-center"><i class="fas fa-check-circle text-green-500 w-6 text-center mr-3"></i> <span><strong class="text-white">Conteúdo Aprovado:</strong> Revisado e validado por especialistas.</span></li>
+                <li class="flex items-center"><i class="fas fa-calendar-check text-green-500 w-6 text-center mr-3"></i> <span><strong class="text-white">Garantia de 7 dias:</strong> Você tem 7 dias para testar o produto.</span></li>
+            </ul>
+        </div>
+        
+        <div class="flex justify-center items-center gap-4 mt-6">
+            <img src="https://i.imgur.com/gसेप्टेम्बर.png" alt="Compra 100% Segura" class="h-10">
+            <img src="https://i.imgur.com/5C20s4s.png" alt="Dados Pessoais Protegidos" class="h-10">
+        </div>
+        <p class="text-xs text-gray-600 text-center mt-2"><i class="fas fa-lock mr-1"></i> Ambiente 100% seguro.</p>
+
+    </div>
+
+    <script>
+        // O CÓDIGO JAVASCRIPT PERMANECE O MESMO.
+        // Nenhuma alteração é necessária aqui.
+        document.addEventListener('DOMContentLoaded', () => {
+            const checkoutFormContainer = document.getElementById('checkout-form-container');
+            const pixContainer = document.getElementById('pix-container');
+            const checkoutForm = document.getElementById('checkout-form');
+            const submitButton = document.getElementById('submit-button');
+            const buttonText = document.getElementById('button-text');
+            const loadingSpinner = document.getElementById('loading-spinner');
+            const errorMessageDiv = document.getElementById('error-message');
+            const pixQrcode = document.getElementById('pix-qrcode');
+            const pixCopyPaste = document.getElementById('pix-copy-paste');
+            const copyButton = document.getElementById('copy-button');
+            const planPriceDisplay = document.getElementById('plan-price-display');
+            const totalPriceDisplay = document.getElementById('total-price-display');
+            const timerDisplay = document.getElementById('timer');
+            const API_BASE_URL = 'https://noskill-servidor.onrender.com';
+            const planDetails = { planName: 'Permanente', planPrice: '14,97' };
+            if (planPriceDisplay && totalPriceDisplay) {
+                const priceText = `R$ ${planDetails.planPrice}`;
+                planPriceDisplay.textContent = priceText;
+                totalPriceDisplay.textContent = priceText;
+            }
+            let timeInSeconds = 15 * 60;
+            const countdown = setInterval(() => {
+                timeInSeconds--;
+                const minutes = Math.floor(timeInSeconds / 60).toString().padStart(2, '0');
+                const seconds = (timeInSeconds % 60).toString().padStart(2, '0');
+                timerDisplay.textContent = `${minutes}:${seconds}`;
+                if (timeInSeconds <= 0) {
+                    clearInterval(countdown);
+                    timerDisplay.textContent = "TEMPO ESGOTADO";
+                    submitButton.disabled = true;
+                    submitButton.classList.add('opacity-50', 'cursor-not-allowed');
+                }
+            }, 1000);
+            checkoutForm.addEventListener('submit', async (e) => {
+                e.preventDefault(); setLoading(true); hideError();
+                const email = document.getElementById('email').value;
+                try {
+                    const response = await fetch(`${API_BASE_URL}/criar-cobranca-pix`, {
+                        method: 'POST', headers: {'Content-Type': 'application/json'},
+                        body: JSON.stringify({ planName: planDetails.planName, customerEmail: email })
+                    });
+                    const data = await response.json();
+                    if (!response.ok) { throw new Error(data.error || 'Ocorreu um erro desconhecido.'); }
+                    displayPixInfo(data);
+                } catch (error) { showError(error.message); setLoading(false); }
+            });
+            copyButton.addEventListener('click', () => {
+                navigator.clipboard.writeText(pixCopyPaste.value);
+                copyButton.innerHTML = '<i class="fas fa-check mr-2"></i> Copiado!';
+                setTimeout(() => { copyButton.innerHTML = '<i class="fas fa-copy mr-2"></i> Copiar Código PIX'; }, 2000);
+            });
+            function setLoading(isLoading) {
+                if (isLoading) {
+                    loadingSpinner.classList.remove('hidden'); buttonText.textContent = 'GERANDO...'; submitButton.disabled = true;
+                } else {
+                    buttonText.textContent = 'ATIVAR MODO CAPUDO!'; loadingSpinner.classList.add('hidden'); submitButton.disabled = false;
+                }
+            }
+            function displayPixInfo({ qrcodeBase64, pixCopiaECola }) {
+                pixQrcode.src = `data:image/png;base64,${qrcodeBase64}`;
+                pixCopyPaste.value = pixCopiaECola;
+                checkoutFormContainer.classList.add('hidden');
+                pixContainer.classList.remove('hidden');
+            }
+            function showError(message) {
+                errorMessageDiv.textContent = message; errorMessageDiv.classList.remove('hidden');
+            }
+            function hideError() {
+                errorMessageDiv.classList.add('hidden');
+            }
+        });
+    </script>
+</body>
+</html>
