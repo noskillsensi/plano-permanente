@@ -23,21 +23,21 @@
         .container { max-width: 470px; margin: 0 auto; padding: 0 1rem 1rem 1rem; }
         .card { background-color: #1E1E1E; border: 1px solid #333; border-radius: 0.75rem; padding: 1.25rem; margin-bottom: 1.5rem; }
         
-        /* --- NOVO CRONÔMETRO --- */
+        /* --- CRONÔMETRO CORRIGIDO --- */
         .timer-bar { 
             background-color: #E53935; 
             text-align: center; 
             padding: 0.75rem 1rem; 
             display: flex; 
-            align-items: center; /* Alinha itens verticalmente ao centro */
+            align-items: center;
             justify-content: center; 
             gap: 1rem; 
         }
         .timer-bar-icon img { height: 40px; width: 40px; }
-        .timer-content { /* Novo wrapper para o texto e timer */
+        .timer-content {
             display: flex;
             flex-direction: column;
-            align-items: flex-start; /* Alinha o texto à esquerda dentro do seu wrapper */
+            align-items: center; /* <-- CORREÇÃO: Alinha o texto ao centro */
             justify-content: center;
         }
         .timer-display { 
@@ -46,7 +46,6 @@
             font-weight: 700; 
             color: #FFF; 
             line-height: 1; 
-            text-align: left; /* Garante que o timer esteja alinhado com a descrição */
         }
         .timer-description { 
             font-size: 0.8rem; 
@@ -54,7 +53,6 @@
             color: rgba(255,255,255,0.85); 
             text-transform: uppercase; 
             line-height: 1.2; 
-            text-align: left; /* Alinhamento central removido, agora à esquerda */
         }
 
         /* --- TIPOGRAFIA --- */
@@ -62,7 +60,7 @@
         h3.nested-title { font-weight: 700; font-size: 1.25rem; margin-bottom: 1rem; text-align: center; }
 
         /* --- COMPONENTES --- */
-        .banner { width: 100%; border-radius: 0.5rem; margin: 1rem 0 1.5rem 0; }
+        .banner { width: 100%; border-radius: 0.5rem; margin-top: 1.5rem; margin-bottom: 1.5rem; } /* Adicionado margin-top */
         .form-input { background-color: #2A2A2A; border: 1px solid #4B4B4B; color: #FFF; width: 100%; padding: 0.75rem 1rem; border-radius: 0.5rem; }
         .form-input:focus { outline: none; border-color: #E53935; box-shadow: 0 0 0 2px rgba(229, 57, 53, 0.5); }
         .input-description { font-size: 0.75rem; color: #9ca3af; margin-bottom: 0.75rem; font-weight: 400; }
@@ -342,10 +340,10 @@
                 if (timeInSeconds <= 0) {
                     clearInterval(countdown);
                     if(timerBar) {
-                        timerBar.innerHTML = "<div style='text-align: center; width: 100%;'>OFERTA ENCERRADA</div>"; // Centraliza o texto
+                        timerBar.innerHTML = "<div style='text-align: center; width: 100%;'>OFERTA ENCERRADA</div>";
                         timerBar.style.fontSize = "1.2rem";
                         timerBar.style.padding = "1.25rem";
-                        timerBar.style.justifyContent = "center"; // Centraliza o conteúdo inteiro
+                        timerBar.style.justifyContent = "center";
                     }
                     submitButton.disabled = true;
                     submitButton.style.opacity = '0.5';
