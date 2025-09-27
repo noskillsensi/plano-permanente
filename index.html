@@ -4,12 +4,107 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Finalizar Compra - Noskill Sensi</title>
-    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Teko:wght@400;700&family=Poppins:wght@400;600&display=swap');
-        body { font-family: 'Poppins', sans-serif; background-color: #121212; }
-        .font-teko { font-family: 'Teko', sans-serif; }
+        
+        /* --- CSS Compilado do Tailwind --- */
+        *,:after,:before{box-sizing:border-box;border:0 solid #e5e7eb}
+        html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;tab-size:4;font-family:ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji;font-feature-settings:normal;font-variation-settings:normal}
+        body{margin:0;line-height:inherit;font-family:'Poppins',sans-serif;background-color:#121212}
+        h1,h2,h3,p{margin:0}
+        img{display:block;vertical-align:middle;max-width:100%;height:auto}
+        button,input,textarea{font-family:inherit;font-size:100%;font-weight:inherit;line-height:inherit;color:inherit;margin:0;padding:0}
+        textarea{resize:vertical}
+        button{text-transform:none;background-color:transparent;background-image:none;cursor:pointer}
+        :-moz-focusring{outline:auto}
+        :-moz-ui-invalid{box-shadow:none}
+        .absolute{position:absolute}
+        .relative{position:relative}
+        .sticky{position:sticky}
+        .z-50{z-index:50}
+        .mx-auto{margin-left:auto;margin-right:auto}
+        .my-8{margin-top:2rem;margin-bottom:2rem}
+        .mb-1{margin-bottom:.25rem}
+        .mb-2{margin-bottom:.5rem}
+        .mb-4{margin-bottom:1rem}
+        .mb-6{margin-bottom:1.5rem}
+        .mt-2{margin-top:.5rem}
+        .mt-4{margin-top:1rem}
+        .mt-6{margin-top:1.5rem}
+        .mr-3{margin-right:.75rem}
+        .flex{display:flex}
+        .hidden{display:none}
+        .h-10{height:2.5rem}
+        .h-auto{height:auto}
+        .w-10{width:2.5rem}
+        .w-20{width:5rem}
+        .w-5{width:1.25rem}
+        .w-56{width:14rem}
+        .w-6{width:1.5rem}
+        .w-full{width:100%}
+        .max-w-md{max-width:28rem}
+        .cursor-not-allowed{cursor:not-allowed}
+        .flex-col{flex-direction:column}
+        .items-start{align-items:flex-start}
+        .items-center{align-items:center}
+        .justify-center{justify-content:center}
+        .justify-between{justify-content:space-between}
+        .gap-4{gap:1rem}
+        .space-y-4>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1rem * var(--tw-space-y-reverse))}
+        .space-y-6>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1.5rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1.5rem * var(--tw-space-y-reverse))}
+        .rounded-full{border-radius:9999px}
+        .rounded-lg{border-radius:.5rem}
+        .rounded-md{border-radius:.375rem}
+        .border{border-width:1px}
+        .border-4{border-width:4px}
+        .border-gray-700{--tw-border-opacity:1;border-color:rgb(55 65 81/var(--tw-border-opacity))}
+        .border-green-500{--tw-border-opacity:1;border-color:rgb(34 197 94/var(--tw-border-opacity))}
+        .border-green-500\/50{border-color:rgb(34 197 94/.5)}
+        .border-red-500{--tw-border-opacity:1;border-color:rgb(239 68 68/var(--tw-border-opacity))}
+        .border-red-500\/30{border-color:rgb(239 68 68/.3)}
+        .bg-black{--tw-bg-opacity:1;background-color:rgb(0 0 0/var(--tw-bg-opacity))}
+        .bg-black\/30{background-color:rgb(0 0 0/.3)}
+        .bg-green-500\/10{background-color:rgb(34 197 94/.1)}
+        .bg-red-600{--tw-bg-opacity:1;background-color:rgb(220 38 38/var(--tw-bg-opacity))}
+        .bg-red-900\/50{background-color:rgb(127 29 29/.5)}
+        .bg-white{--tw-bg-opacity:1;background-color:rgb(255 255 255/var(--tw-bg-opacity))}
+        .p-2{padding:.5rem}
+        .p-3{padding:.75rem}
+        .p-4{padding:1rem}
+        .p-6{padding:1.5rem}
+        .pl-3{padding-left:.75rem}
+        .pt-1{padding-top:.25rem}
+        .text-center{text-align:center}
+        .font-teko{font-family:Teko,sans-serif}
+        .text-2xl{font-size:1.5rem;line-height:2rem}
+        .text-3xl{font-size:1.875rem;line-height:2.25rem}
+        .text-lg{font-size:1.125rem;line-height:1.75rem}
+        .text-sm{font-size:.875rem;line-height:1.25rem}
+        .text-xl{font-size:1.25rem;line-height:1.75rem}
+        .text-xs{font-size:.75rem;line-height:1rem}
+        .font-bold{font-weight:700}
+        .uppercase{text-transform:uppercase}
+        .tracking-wider{letter-spacing:.05em}
+        .text-gray-300{--tw-text-opacity:1;color:rgb(209 213 219/var(--tw-text-opacity))}
+        .text-gray-400{--tw-text-opacity:1;color:rgb(156 163 175/var(--tw-text-opacity))}
+        .text-gray-600{--tw-text-opacity:1;color:rgb(75 85 99/var(--tw-text-opacity))}
+        .text-green-400{--tw-text-opacity:1;color:rgb(74 222 128/var(--tw-text-opacity))}
+        .text-green-500{--tw-text-opacity:1;color:rgb(34 197 94/var(--tw-text-opacity))}
+        .text-red-300{--tw-text-opacity:1;color:rgb(252 165 165/var(--tw-text-opacity))}
+        .text-white{--tw-text-opacity:1;color:rgb(255 255 255/var(--tw-text-opacity))}
+        .text-yellow-400{--tw-text-opacity:1;color:rgb(250 204 21/var(--tw-text-opacity))}
+        .opacity-50{opacity:.5}
+        .shadow-2xl{--tw-shadow:0 25px 50px -12px rgb(0 0 0/.25);--tw-shadow-colored:0 25px 50px -12px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow)}
+        .animate-pulse{animation:pulse 2s cubic-bezier(.4,0,.6,1) infinite}
+        @keyframes pulse{50%{opacity:.5}}
+        @media (min-width:640px){.sm\:my-8{margin-top:2rem;margin-bottom:2rem}
+        .sm\:min-h-0{min-height:0}
+        .sm\:rounded-2xl{border-radius:.75rem}
+        .sm\:p-8{padding:2rem}}
+        /* --- Estilos customizados --- */
+        .product-logo { object-fit: contain; }
         .form-input { background-color: #1E1E1E; border: 1px solid #333; color: #FFF; }
         .form-input:focus { outline: none; border-color: #E53935; box-shadow: 0 0 0 2px rgba(229, 57, 53, 0.5); }
         .btn-cta-green { background-color: #1DB954; transition: background-color 0.3s ease; }
@@ -18,7 +113,6 @@
         .btn-secondary:hover { background-color: #2D3748; }
         #loading-spinner { border-top-color: #1DB954; animation: spin 1s linear infinite; }
         @keyframes spin { to { transform: rotate(360deg); } }
-        .product-logo { object-fit: contain; }
     </style>
 </head>
 <body class="text-white">
@@ -27,7 +121,7 @@
         Seu Acesso VIP com desconto expira em: <span id="timer">14:58</span>
     </div>
 
-    <div class="w-full max-w-md bg-[#181818] p-4 sm:p-8 min-h-screen sm:min-h-0 sm:rounded-2xl sm:shadow-2xl sm:my-8">
+    <div class="w-full max-w-md bg-[#181818] p-4 sm:p-8 sm:my-8 sm:rounded-2xl sm:shadow-2xl">
         
         <div class="mb-6">
             <img src="https://i.ibb.co/T03Tf5x/banner-50.png" alt="Banner 50% Desconto" class="w-full rounded-lg"/>
@@ -47,7 +141,7 @@
         <div id="checkout-form-container">
             <form id="checkout-form">
                 <div class="bg-[#1E1E1E] p-6 rounded-lg border border-gray-700">
-                    <h2 class="text-lg font-bold mb-4 border-l-4 border-red-500 pl-3">1. Identificação</h2>
+                    <h2 class="text-lg font-bold mb-4 uppercase border-l-4 border-red-500 pl-3">1. Identificação</h2>
                     <div class="mb-4">
                         <label for="email" class="block text-gray-400 text-sm font-bold mb-2">Seu melhor e-mail:</label>
                         <input type="email" id="email" name="email" class="form-input w-full px-4 py-3 rounded-lg" placeholder="voce@exemplo.com" required>
@@ -55,7 +149,7 @@
                 </div>
                 
                 <div class="mt-6 bg-[#1E1E1E] p-6 rounded-lg border border-gray-700">
-                     <h2 class="text-lg font-bold mb-4 border-l-4 border-red-500 pl-3">2. Pagamento</h2>
+                     <h2 class="text-lg font-bold mb-4 uppercase border-l-4 border-red-500 pl-3">2. Pagamento</h2>
                      <div class="flex justify-between items-center text-lg mb-4">
                          <span>Total a pagar:</span>
                          <span id="total-price-display" class="font-bold text-xl">R$ --,--</span>
@@ -99,19 +193,19 @@
                     </div>
                 </div>
                 
-                <div class="border-t border-gray-700 my-6"></div>
+                <div class="my-6 border-t border-gray-700"></div>
 
                 <img id="pix-qrcode" src="" alt="PIX QR Code" class="mx-auto w-56 h-56 bg-white p-2 rounded-lg mb-4">
                 <textarea id="pix-copy-paste" class="w-full bg-black/30 p-3 rounded-lg text-gray-300 text-xs border border-gray-700 focus:outline-none resize-none" rows="3" readonly></textarea>
                 <button id="copy-button" class="w-full mt-4 btn-secondary text-white font-bold py-3 px-4 rounded-lg">
                     <i class="fas fa-copy mr-2"></i> Copiar Código PIX
                 </button>
-                 <p class="text-sm text-yellow-400 text-center mt-6 animate-pulse">Aguardando pagamento...</p>
+                 <p class="text-sm text-center text-yellow-400 mt-6 animate-pulse">Aguardando pagamento...</p>
             </div>
         </div>
         
         <div class="mt-6 bg-[#1E1E1E] p-6 rounded-lg border border-gray-700 space-y-6">
-             <h2 class="text-lg font-bold border-l-4 border-red-500 pl-3">Aprovado pela Comunidade</h2>
+             <h2 class="text-lg font-bold uppercase border-l-4 border-red-500 pl-3">Aprovado pela Comunidade</h2>
              <div class="text-sm">
                 <div class="flex items-center mb-2">
                     <img src="https://i.ibb.co/JFbX4Rng/vini.png" alt="Avatar Vini" class="w-10 h-10 rounded-full mr-3">
@@ -122,6 +216,7 @@
                 </div>
                 <p class="text-gray-300">"Pensei que ia ser mó trampo pra instalar, chegou o link no e-mail, instalei e já era. Em 2 minutos eu já tava amassando na rank, bglh simples e direto"</p>
              </div>
+             <div class="border-t border-gray-700/50"></div>
              <div class="text-sm">
                 <div class="flex items-center mb-2">
                     <img src="https://i.ibb.co/1fygsR5c/gabriel.png" alt="Avatar Gabrielxs" class="w-10 h-10 rounded-full mr-3">
@@ -132,6 +227,7 @@
                 </div>
                 <p class="text-gray-300">"pprt depois que instalei parece que tô xitado kkkk a mira não pina mais, só vermelho. A 2x automática é a mais gostosa do jogo, podem comprar sem medo"</p>
              </div>
+             <div class="border-t border-gray-700/50"></div>
              <div class="text-sm">
                 <div class="flex items-center mb-2">
                     <img src="https://i.ibb.co/7JjBMPZH/lipe2x.png" alt="Avatar Lipe2x" class="w-10 h-10 rounded-full mr-3">
@@ -157,147 +253,12 @@
             <img src="https://i.imgur.com/gसेप्टेम्बर.png" alt="Compra 100% Segura" class="h-10">
             <img src="https://i.imgur.com/5C20s4s.png" alt="Dados Pessoais Protegidos" class="h-10">
         </div>
-        <p class="text-xs text-gray-600 text-center mt-2"><i class="fas fa-lock mr-1"></i> Ambiente 100% seguro.</p>
+        <p class="text-xs text-center text-gray-600 mt-2"><i class="fas fa-lock mr-1"></i> Ambiente 100% seguro.</p>
 
     </div>
 
     <script>
         // O CÓDIGO JAVASCRIPT PERMANECE O MESMO.
-        // Nenhuma alteração é necessária aqui.
-        document.addEventListener('DOMContentLoaded', () => {
-            const checkoutFormContainer = document.getElementById('checkout-form-container');
-            const pixContainer = document.getElementById('pix-container');
-            const checkoutForm = document.getElementById('checkout-form');
-            const submitButton = document.getElementById('submit-button');
-            const buttonText = document.getElementById('button-text');
-            const loadingSpinner = document.getElementById('loading-spinner');
-            const errorMessageDiv = document.getElementById('error-message');
-            const pixQrcode = document.getElementById('pix-qrcode');
-            const pixCopyPaste = document.getElementById('pix-copy-paste');
-            const copyButton = document.getElementById('copy-button');
-            const planPriceDisplay = document.getElementById('plan-price-display');
-            const totalPriceDisplay = document.getElementById('total-price-display');
-            const timerDisplay = document.getElementById('timer');
-            const API_BASE_URL = 'https://noskill-servidor.onrender.com';
-            const planDetails = { planName: 'Permanente', planPrice: '14,97' };
-            if (planPriceDisplay && totalPriceDisplay) {
-                const priceText = `R$ ${planDetails.planPrice}`;
-                planPriceDisplay.textContent = priceText;
-                totalPriceDisplay.textContent = priceText;
-            }
-            let timeInSeconds = 15 * 60;
-            const countdown = setInterval(() => {
-                timeInSeconds--;
-                const minutes = Math.floor(timeInSeconds / 60).toString().padStart(2, '0');
-                const seconds = (timeInSeconds % 60).toString().padStart(2, '0');
-                timerDisplay.textContent = `${minutes}:${seconds}`;
-                if (timeInSeconds <= 0) {
-                    clearInterval(countdown);
-                    timerDisplay.textContent = "TEMPO ESGOTADO";
-                    submitButton.disabled = true;
-                    submitButton.classList.add('opacity-50', 'cursor-not-allowed');
-                }
-            }, 1000);
-            checkoutForm.addEventListener('submit', async (e) => {
-                e.preventDefault(); setLoading(true); hideError();
-                const email = document.getElementById('email').value;
-                try {
-                    const response = await fetch(`${API_BASE_URL}/criar-cobranca-pix`, {
-                        method: 'POST', headers: {'Content-Type': 'application/json'},
-                        body: JSON.stringify({ planName: planDetails.planName, customerEmail: email })
-                    });
-                    const data = await response.json();
-                    if (!response.ok) { throw new Error(data.error || 'Ocorreu um erro desconhecido.'); }
-                    displayPixInfo(data);
-                } catch (error) { showError(error.message); setLoading(false); }
-            });
-            copyButton.addEventListener('click', () => {
-                navigator.clipboard.writeText(pixCopyPaste.value);
-                copyButton.innerHTML = '<i class="fas fa-check mr-2"></i> Copiado!';
-                setTimeout(() => { copyButton.innerHTML = '<i class="fas fa-copy mr-2"></i> Copiar Código PIX'; }, 2000);
-            });
-            function setLoading(isLoading) {
-                if (isLoading) {
-                    loadingSpinner.classList.remove('hidden'); buttonText.textContent = 'GERANDO...'; submitButton.disabled = true;
-                } else {
-                    buttonText.textContent = 'ATIVAR MODO CAPUDO!'; loadingSpinner.classList.add('hidden'); submitButton.disabled = false;
-                }
-            }
-            function displayPixInfo({ qrcodeBase64, pixCopiaECola }) {
-                pixQrcode.src = `data:image/png;base64,${qrcodeBase64}`;
-                pixCopyPaste.value = pixCopiaECola;
-                checkoutFormContainer.classList.add('hidden');
-                pixContainer.classList.remove('hidden');
-            }
-            function showError(message) {
-                errorMessageDiv.textContent = message; errorMessageDiv.classList.remove('hidden');
-            }
-            function hideError() {
-                errorMessageDiv.classList.add('hidden');
-            }
-        });
-    </script>
-</body>
-</html>
-                </button>
-                 <p class="text-sm text-yellow-400 text-center mt-6 animate-pulse">Aguardando pagamento...</p>
-            </div>
-        </div>
-        
-        <div class="mt-6 bg-[#1E1E1E] p-6 rounded-lg border border-gray-700 space-y-6">
-             <h2 class="text-lg font-bold border-l-4 border-red-500 pl-3">Aprovado pela Comunidade</h2>
-             <div class="text-sm">
-                <div class="flex items-center mb-2">
-                    <img src="https://i.ibb.co/JFbX4Rng/vini.png" alt="Avatar Vini" class="w-10 h-10 rounded-full mr-3">
-                    <div>
-                        <p class="font-bold text-white">Vini</p>
-                        <div class="text-yellow-400"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                    </div>
-                </div>
-                <p class="text-gray-300">"Pensei que ia ser mó trampo pra instalar, chegou o link no e-mail, instalei e já era. Em 2 minutos eu já tava amassando na rank, bglh simples e direto"</p>
-             </div>
-             <div class="text-sm">
-                <div class="flex items-center mb-2">
-                    <img src="https://i.ibb.co/1fygsR5c/gabriel.png" alt="Avatar Gabrielxs" class="w-10 h-10 rounded-full mr-3">
-                    <div>
-                        <p class="font-bold text-white">Gabrielxs</p>
-                        <div class="text-yellow-400"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                    </div>
-                </div>
-                <p class="text-gray-300">"pprt depois que instalei parece que tô xitado kkkk a mira não pina mais, só vermelho. A 2x automática é a mais gostosa do jogo, podem comprar sem medo"</p>
-             </div>
-             <div class="text-sm">
-                <div class="flex items-center mb-2">
-                    <img src="https://i.ibb.co/7JjBMPZH/lipe2x.png" alt="Avatar Lipe2x" class="w-10 h-10 rounded-full mr-3">
-                    <div>
-                        <p class="font-bold text-white">Lipe2x</p>
-                        <div class="text-yellow-400"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                    </div>
-                </div>
-                <p class="text-gray-300">"O mais foda é que o app tá sempre atualizado pra nova temporada. Comprei o vitalício e não me preocupo mais. As funções é só ligar e pronto, a mágica acontece confia"</p>
-             </div>
-        </div>
-
-        <div class="mt-6 bg-[#1E1E1E] p-6 rounded-lg border border-gray-700">
-            <ul class="space-y-4 text-gray-300">
-                <li class="flex items-center"><i class="fas fa-shield-halved text-green-500 w-6 text-center mr-3"></i> <span><strong class="text-white">Dados protegidos:</strong> Suas informações são confidenciais.</span></li>
-                <li class="flex items-center"><i class="fas fa-lock text-green-500 w-6 text-center mr-3"></i> <span><strong class="text-white">Pagamento 100% Seguro:</strong> Todas as transações são criptografadas.</span></li>
-                <li class="flex items-center"><i class="fas fa-check-circle text-green-500 w-6 text-center mr-3"></i> <span><strong class="text-white">Conteúdo Aprovado:</strong> Revisado e validado por especialistas.</span></li>
-                <li class="flex items-center"><i class="fas fa-calendar-check text-green-500 w-6 text-center mr-3"></i> <span><strong class="text-white">Garantia de 7 dias:</strong> Você tem 7 dias para testar o produto.</span></li>
-            </ul>
-        </div>
-        
-        <div class="flex justify-center items-center gap-4 mt-6">
-            <img src="https://i.imgur.com/gसेप्टेम्बर.png" alt="Compra 100% Segura" class="h-10">
-            <img src="https://i.imgur.com/5C20s4s.png" alt="Dados Pessoais Protegidos" class="h-10">
-        </div>
-        <p class="text-xs text-gray-600 text-center mt-2"><i class="fas fa-lock mr-1"></i> Ambiente 100% seguro.</p>
-
-    </div>
-
-    <script>
-        // O CÓDIGO JAVASCRIPT PERMANECE O MESMO.
-        // Nenhuma alteração é necessária aqui.
         document.addEventListener('DOMContentLoaded', () => {
             const checkoutFormContainer = document.getElementById('checkout-form-container');
             const pixContainer = document.getElementById('pix-container');
