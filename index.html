@@ -261,7 +261,6 @@
             const currentPlan = plans[selectedPlanKey] || plans[defaultPlanKey];
 
             const checkoutForm = document.getElementById('checkout-form');
-            const paymentStepCard = document.getElementById('payment-step-card');
             const pixContainer = document.getElementById('pix-container');
             const submitButton = document.getElementById('submit-button');
             const buttonText = document.getElementById('button-text');
@@ -291,30 +290,35 @@
                     loadingSpinner.style.display = 'none';
                 }
             }
-
+            
+            // **** INÍCIO DA CORREÇÃO ****
             function displayPixInfo({ qrcodeBase64, pixCopiaECola }) {
                 pixQrcode.src = `data:image/png;base64,${qrcodeBase64}`;
                 pixCopyPaste.value = pixCopiaECola;
+
+                // CORREÇÃO: Esconde os elementos individuais, não o container-pai
+                const orderSummaryCard = document.querySelector('#checkout-content > .card:first-child');
+                if (orderSummaryCard) {
+                    orderSummaryCard.classList.add('hidden'); // Esconde o Resumo do Pedido
+                }
+                document.getElementById('checkout-form').classList.add('hidden'); // Esconde o Formulário
                 
-                // Esconde o formulário e mostra a área PIX
-                const checkoutContent = document.getElementById('checkout-content');
-                if(checkoutContent) checkoutContent.classList.add('hidden');
+                // Mostra a área do PIX
                 pixContainer.classList.remove('hidden');
                 
                 pixContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
             }
+            // **** FIM DA CORREÇÃO ****
 
             checkoutForm.addEventListener('submit', async (e) => {
                 e.preventDefault();
 
-                // Validação simples de e-mail
                 const email = document.getElementById('email').value;
                 if (!email || !/^\S+@\S+\.\S+$/.test(email)) {
                     alert('Por favor, insira um e-mail válido.');
                     return;
                 }
                 
-                // Dispara o evento InitiateCheckout para o Pixel da Meta
                 fbq('track', 'InitiateCheckout', {
                     value: parseFloat(currentPlan.price),
                     currency: 'BRL',
@@ -322,7 +326,6 @@
                 });
 
                 setLoading(true);
-
                 const name = document.getElementById('name').value;
 
                 try {
