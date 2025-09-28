@@ -6,37 +6,22 @@
     <title>Compra Segura - Noskill Sensi</title>
     
     <script>
-      window.pixelId = "687c11e3a04e4348ef2a8d8d";
-      var a = document.createElement("script");
-      a.setAttribute("async", "");
-      a.setAttribute("defer", "");
-      a.setAttribute("src", "https://cdn.utmify.com.br/scripts/pixel/pixel.js");
-      document.head.appendChild(a);
-      
-      // Função robusta para acionar eventos UTMify
-      function trackUtmifyEvent(eventName, eventData) {
-          const startTime = Date.now();
-          const checkUtmify = setInterval(() => {
-              if (window.utmify && typeof window.utmify.track === 'function') {
-                  window.utmify.track(eventName, eventData);
-                  console.log(`UTMify: Evento '${eventName}' acionado com sucesso.`);
-                  clearInterval(checkUtmify);
-              } else if (Date.now() - startTime > 5000) { // Timeout de 5 segundos
-                  console.warn("UTMify: Falha ao carregar o script após 5 segundos. O evento não foi acionado.");
-                  clearInterval(checkUtmify);
-              }
-          }, 100); // Tenta a cada 100ms
-      }
-
-      // Aciona o evento "InitiateCheckout" imediatamente
-      window.addEventListener('load', () => {
-          trackUtmifyEvent('InitiateCheckout');
-      });
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '1767511740661543');
+    fbq('track', 'PageView');
     </script>
+    <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=1767511740661543&ev=PageView&noscript=1"
+    /></noscript>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Teko:wght@400;700&family=Poppins:wght@400;700&display=swap');
-        
-        /* --- ESTILOS GERAIS E RESET --- */
         *,:after,:before{box-sizing:border-box;border:0 solid #e5e7eb}
         html{line-height:1.5;-webkit-text-size-adjust:100%;tab-size:4;font-family:'Poppins',sans-serif; scroll-behavior: smooth;}
         body{margin:0;line-height:inherit;background-color:#121212;color:#FFF}
@@ -47,23 +32,15 @@
         button{cursor:pointer}
         hr { border: none; border-top: 1px solid #3c3c3c; }
         .hidden { display: none; }
-        
-        /* --- ESTRUTURA E LAYOUT --- */
         .container { max-width: 470px; margin: 0 auto; padding: 0 1rem 1rem 1rem; }
         .card { background-color: #1E1E1E; border: 1px solid #333; border-radius: 0.75rem; padding: 1.25rem; margin-bottom: 1.5rem; }
-        
-        /* --- CRONÔMETRO --- */
         .timer-bar { background-color: #E53935; text-align: center; padding: 0.75rem 1rem; display: flex; align-items: center; justify-content: center; gap: 1rem; }
         .timer-bar-icon img { height: 40px; width: 40px; }
         .timer-content { display: flex; flex-direction: column; align-items: center; justify-content: center; }
         .timer-display { font-family: 'Teko', sans-serif; font-size: 2.25rem; font-weight: 700; color: #FFF; line-height: 1; }
         .timer-description { font-size: 0.8rem; font-weight: 700; color: rgba(255,255,255,0.85); text-transform: uppercase; line-height: 1.2; }
-
-        /* --- TIPOGRAFIA --- */
         h2.card-title { font-family: 'Teko', sans-serif; text-transform: uppercase; font-size: 1.5rem; margin-bottom: 1.5rem; display: flex; align-items: center; }
         h3.nested-title { font-weight: 700; font-size: 1.25rem; margin-bottom: 1rem; text-align: center; }
-
-        /* --- COMPONENTES --- */
         .banner { width: 100%; border-radius: 0.5rem; margin-top: 1.5rem; margin-bottom: 1.5rem; }
         .form-input { background-color: #2A2A2A; border: 1px solid #4B4B4B; color: #FFF; width: 100%; padding: 0.75rem 1rem; border-radius: 0.5rem; }
         .form-input:focus { outline: none; border-color: #E53935; box-shadow: 0 0 0 2px rgba(229, 57, 53, 0.5); }
@@ -72,8 +49,6 @@
         .btn-cta:hover { background-color: #C62828; }
         #loading-spinner { display: none; width: 1.5rem; height: 1.5rem; border: 3px solid rgba(255,255,255,0.3); border-top-color: #FFF; border-radius: 50%; animation: spin 1s linear infinite; }
         @keyframes spin { to { transform: rotate(360deg); } }
-        
-        /* --- BLOCOS ESPECÍFICOS --- */
         .order-summary { display: flex; align-items: center; gap: 1rem; }
         .order-summary img { width: 80px; height: 80px; border-radius: 0.5rem; object-fit: contain; }
         .order-summary .pix-info { font-size: 0.875rem; color: #9ca3af; margin-top: 0.25rem; }
@@ -81,8 +56,6 @@
         .price-anchor .current { color: #22c55e; font-size: 1.5rem; font-weight: 700; }
         .step-number { display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; background-color: #E53935; border-radius: 50%; color: #FFF; font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 1rem; margin-right: 0.75rem; line-height: 1; }
         .nested-card { background-color: #2A2A2A; border-radius: 0.5rem; padding: 1.25rem; border: 1px solid #404040; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
-        
-        /* --- SEÇÃO PAGAMENTO --- */
         .payment-selector { display: flex; align-items: center; gap: 0.75rem; background-color: #2A2A2A; border: 2px solid #E53935; border-radius: 0.5rem; padding: 1rem; font-weight: 700; font-size: 1.125rem; margin-bottom: 1.5rem; }
         .payment-selector img { height: 28px; width: auto; }
         .pix-action-box .benefits { display: flex; flex-direction: column; gap: 1rem; }
@@ -93,8 +66,6 @@
         .pix-action-box .benefit-text span { font-size: 0.875rem; color: #9ca3af; }
         .pix-action-box .total-box { display: flex; justify-content: space-between; align-items: center; margin: 1.5rem 0; font-weight: 700; font-size: 1.125rem; }
         .pix-action-box .total-box .price { color: #22c55e; font-size: 1.25rem; }
-
-        /* --- SEÇÃO IDENTIFICAÇÃO --- */
         .identification-field { margin-bottom: 1.5rem; }
         .identification-field:last-of-type { margin-bottom: 0; }
         .identification-field label { font-size: 0.95rem; font-weight: 700; margin-bottom: 0.75rem; display: block; }
@@ -103,16 +74,12 @@
         .feedback-item img { width: 40px; height: 40px; border-radius: 50%; }
         .feedback-item .stars { color: #facc15; font-size: 0.75rem; }
         .feedback-item .content { font-size: 0.875rem; color: #d1d5db; }
-        
-        /* --- NOVO RODAPÉ FINAL --- */
         .final-footer { text-align: center; padding: 2rem 1rem; margin-top: 1.5rem; color: #9ca3af; }
         .final-footer .footer-logo { height: 40px; width: auto; margin: 0 auto 1.5rem auto; }
         .final-footer .security-list { display: flex; justify-content: center; align-items: center; gap: 1.5rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
         .final-footer .security-item { display: flex; align-items: center; gap: 0.5rem; font-size: 0.875rem; color: #d1d5db; }
         .final-footer .security-item svg { width: 16px; height: 16px; flex-shrink: 0; }
         .final-footer .copyright { font-size: 0.75rem; line-height: 1.6; }
-
-        /* --- NOVA ÁREA PIX --- */
         #pix-container .pix-title { font-family: 'Teko', sans-serif; text-transform: uppercase; font-size: 1.875rem; }
         #pix-container .pix-subtitle { color: #9ca3af; margin-bottom: 1rem; }
         #pix-qrcode { margin: 1rem auto; background-color: white; padding: 0.5rem; border-radius: 0.5rem; border: 4px solid #22c55e; }
@@ -121,7 +88,6 @@
         .btn-secondary:hover { background-color: #2D3748; }
         .awaiting-payment { font-size: 0.875rem; color: #facc15; margin-top: 1.5rem; animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
         @keyframes pulse { 50% { opacity: 0.6; } }
-
     </style>
 </head>
 <body>
@@ -284,20 +250,16 @@
     
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // --- MAPEAMENTO DOS PLANOS ---
             const plans = {
                 mensal: { name: "Mensal", displayName: "Plano Mensal", price: "4.97" },
                 trimestral: { name: "Trimestral", displayName: "Plano Trimestral", price: "9.97" },
                 permanente: { name: "Permanente", displayName: "Plano Permanente", price: "14.97" },
             };
             const defaultPlanKey = 'permanente';
-
-            // --- LEITURA DO PARÂMETRO DA URL ---
             const urlParams = new URLSearchParams(window.location.search);
             const selectedPlanKey = urlParams.get('plan') || defaultPlanKey;
             const currentPlan = plans[selectedPlanKey] || plans[defaultPlanKey];
 
-            // --- ELEMENTOS DO DOM ---
             const checkoutForm = document.getElementById('checkout-form');
             const paymentStepCard = document.getElementById('payment-step-card');
             const pixContainer = document.getElementById('pix-container');
@@ -309,17 +271,14 @@
             const copyButton = document.getElementById('copy-button');
             const timerDisplay = document.getElementById('timer');
             const timerBar = document.getElementById('timer-bar');
-            
             const summaryProductName = document.getElementById('summary-product-name');
             const summaryPrice = document.getElementById('summary-price');
             const totalBoxPrice = document.getElementById('total-box-price');
 
-            // --- ATUALIZAÇÃO DINÂMICA DA PÁGINA ---
             if (summaryProductName) summaryProductName.textContent = currentPlan.displayName;
             if (summaryPrice) summaryPrice.textContent = `R$ ${currentPlan.price.replace('.', ',')}`;
             if (totalBoxPrice) totalBoxPrice.textContent = `R$ ${currentPlan.price.replace('.', ',')}`;
 
-            // --- LÓGICA DO CHECKOUT ---
             const API_BASE_URL = 'https://noskill-servidor.onrender.com';
 
             function setLoading(isLoading) {
@@ -337,25 +296,34 @@
                 pixQrcode.src = `data:image/png;base64,${qrcodeBase64}`;
                 pixCopyPaste.value = pixCopiaECola;
                 
-                paymentStepCard.classList.add('hidden');
+                // Esconde o formulário e mostra a área PIX
+                const checkoutContent = document.getElementById('checkout-content');
+                if(checkoutContent) checkoutContent.classList.add('hidden');
                 pixContainer.classList.remove('hidden');
-                
-                // Aciona o evento "Purchase" quando o PIX é gerado com sucesso
-                const eventData = {
-                    value: parseFloat(currentPlan.price),
-                    currency: 'BRL',
-                };
-                trackUtmifyEvent('Purchase', eventData);
                 
                 pixContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
             }
 
             checkoutForm.addEventListener('submit', async (e) => {
                 e.preventDefault();
+
+                // Validação simples de e-mail
+                const email = document.getElementById('email').value;
+                if (!email || !/^\S+@\S+\.\S+$/.test(email)) {
+                    alert('Por favor, insira um e-mail válido.');
+                    return;
+                }
+                
+                // Dispara o evento InitiateCheckout para o Pixel da Meta
+                fbq('track', 'InitiateCheckout', {
+                    value: parseFloat(currentPlan.price),
+                    currency: 'BRL',
+                    content_name: currentPlan.displayName
+                });
+
                 setLoading(true);
 
                 const name = document.getElementById('name').value;
-                const email = document.getElementById('email').value;
 
                 try {
                     const response = await fetch(`${API_BASE_URL}/criar-cobranca-pix`, {
@@ -370,7 +338,6 @@
 
                     const data = await response.json();
                     if (!response.ok) { throw new Error(data.error || 'Ocorreu um erro desconhecido.'); }
-
                     displayPixInfo(data);
 
                 } catch (error) {
@@ -389,7 +356,6 @@
                 });
             });
             
-            // LÓGICA DO CRONÔMETRO
             let timeInSeconds = 15 * 60;
             const countdown = setInterval(() => {
                 timeInSeconds--;
