@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pedido Recebido - Noskill Sensi</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Teko:wght@400;700&family=Poppins:wght@400;700&display=swap');
+        *,:after,:before{box-sizing:border-box;border:0 solid #e5e7eb}
+        html{line-height:1.5;-webkit-text-size-adjust:100%;tab-size:4;font-family:'Poppins',sans-serif;}
+        body{margin:0;line-height:inherit;background-color:#121212;color:#FFF}
+        img{display:block;vertical-align:middle;max-width:100%;height:auto}
+        button,input,textarea{font-family:inherit;font-size:100%;font-weight:inherit;line-height:inherit;color:inherit;margin:0;padding:0;background-color:transparent;background-image:none;}
+        button{cursor:pointer}
+        .container { max-width: 470px; margin: 0 auto; padding: 2rem 1rem; text-align: center; }
+        .card { background-color: #1E1E1E; border: 1px solid #333; border-radius: 0.75rem; padding: 2rem; margin-bottom: 1.5rem; }
+        .header-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 1.5rem auto;
+            background-color: #22c55e;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .header-icon svg { width: 32px; height: 32px; color: #FFF; }
+        .title { font-family: 'Teko', sans-serif; font-size: 2.5rem; line-height: 1.1; text-transform: uppercase; color: #FFF; }
+        .subtitle { color: #9ca3af; margin-top: 0.5rem; margin-bottom: 2rem; font-size: 1rem; }
+        #pix-qrcode { margin: 1.5rem auto; background-color: white; padding: 0.5rem; border-radius: 0.5rem; max-width: 220px; }
+        #pix-copy-paste { width: 100%; background-color: #2A2A2A; border: 1px solid #4B4B4B; padding: 0.75rem; border-radius: 0.5rem; text-align: center; font-size: 0.8rem; color: #d1d5db; resize: none; margin-bottom: 1rem; }
+        .btn-secondary { background-color: #4A5568; transition: background-color 0.3s ease; width: 100%; color: #FFF; font-weight: 700; padding: 0.75rem; border-radius: 0.5rem; display: flex; align-items: center; justify-content: center; gap: 0.5rem; }
+        .btn-secondary:hover { background-color: #2D3748; }
+        .footer-note { font-size: 0.875rem; color: #facc15; margin-top: 2rem; animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
+        @keyframes pulse { 50% { opacity: 0.7; } }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="card">
+            <div class="header-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                </svg>
+            </div>
+            <h1 class="title">Pedido Recebido! Falta Pouco!</h1>
+            <p class="subtitle">Para finalizar sua compra e receber o acesso, realize o pagamento via PIX abaixo.</p>
+
+            <img id="pix-qrcode" src="" alt="PIX QR Code">
+
+            <textarea id="pix-copy-paste" rows="3" readonly></textarea>
+            <button id="copy-button" class="btn-secondary">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/>
+                    <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zM-1 1.5A1.5 1.5 0 0 1 .5 0h3A1.5 1.5 0 0 1 5 1.5v1A1.5 1.5 0 0 1 3.5 4h-3A1.5 1.5 0 0 1-1 2.5v-1z"/>
+                </svg>
+                <span id="copy-button-text">Copiar Código PIX</span>
+            </button>
+            <p class="footer-note">Aguardando pagamento... Seu acesso será enviado para o e-mail informado assim que o pagamento for confirmado.</p>
+        </div>
+        <img src="https://i.ibb.co/dwmcHL3T/aOplo9H.png" alt="Noskill Sensi Logo" style="height: 30px; width: auto; margin: 2rem auto 0 auto; opacity: 0.5;">
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const params = new URLSearchParams(window.location.search);
+            
+            const qrCodeData = params.get('qr_code');
+            const pixCopyCode = params.get('pix_copy');
+
+            const qrCodeElement = document.getElementById('pix-qrcode');
+            const pixCopyElement = document.getElementById('pix-copy-paste');
+            const copyButton = document.getElementById('copy-button');
+            const copyButtonText = document.getElementById('copy-button-text');
+
+            if (qrCodeData && pixCopyCode) {
+                qrCodeElement.src = `data:image/png;base64,${decodeURIComponent(qrCodeData)}`;
+                pixCopyElement.value = decodeURIComponent(pixCopyCode);
+            } else {
+                document.querySelector('.card').innerHTML = '<h1 class="title">Erro</h1><p class="subtitle">Não foi possível carregar os dados do pagamento. Por favor, volte e tente novamente.</p>';
+            }
+
+            copyButton.addEventListener('click', () => {
+                navigator.clipboard.writeText(pixCopyElement.value).then(() => {
+                    copyButtonText.textContent = 'Copiado!';
+                    setTimeout(() => {
+                        copyButtonText.textContent = 'Copiar Código PIX';
+                    }, 2000);
+                }).catch(err => {
+                    console.error('Falha ao copiar texto: ', err);
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>
