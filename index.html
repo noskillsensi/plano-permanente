@@ -80,14 +80,6 @@
         .final-footer .security-item { display: flex; align-items: center; gap: 0.5rem; font-size: 0.875rem; color: #d1d5db; }
         .final-footer .security-item svg { width: 16px; height: 16px; flex-shrink: 0; }
         .final-footer .copyright { font-size: 0.75rem; line-height: 1.6; }
-        #pix-container .pix-title { font-family: 'Teko', sans-serif; text-transform: uppercase; font-size: 1.875rem; }
-        #pix-container .pix-subtitle { color: #9ca3af; margin-bottom: 1rem; }
-        #pix-qrcode { margin: 1rem auto; background-color: white; padding: 0.5rem; border-radius: 0.5rem; border: 4px solid #22c55e; }
-        #pix-copy-paste { width: 100%; background-color: #2A2A2A; border: 1px solid #4B4B4B; padding: 0.75rem; border-radius: 0.5rem; text-align: center; font-size: 0.8rem; color: #d1d5db; resize: none; }
-        .btn-secondary { background-color: #4A5568; transition: background-color 0.3s ease; width: 100%; color: #FFF; font-weight: 700; padding: 0.75rem; border-radius: 0.5rem; display: flex; align-items: center; justify-content: center; gap: 0.5rem; margin-top: 1rem;}
-        .btn-secondary:hover { background-color: #2D3748; }
-        .awaiting-payment { font-size: 0.875rem; color: #facc15; margin-top: 1.5rem; animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
-        @keyframes pulse { 50% { opacity: 0.6; } }
     </style>
 </head>
 <body>
@@ -178,18 +170,6 @@
                     </div>
                 </div>
             </form>
-
-            <div id="pix-container" class="card hidden text-center">
-                <h2 class="pix-title">Pague com PIX para Ativar</h2>
-                <p class="pix-subtitle">Escaneie o QR Code ou use o Copia e Cola.</p>
-                <img id="pix-qrcode" src="" alt="PIX QR Code" width="220" height="220">
-                <textarea id="pix-copy-paste" rows="3" readonly></textarea>
-                <button id="copy-button" class="btn-secondary">
-                    <i class="fas fa-copy" style="margin-right: 0.5rem;"></i>
-                    Copiar Código PIX
-                </button>
-                <p class="awaiting-payment">Aguardando pagamento...</p>
-            </div>
         </div>
 
         <div class="card">
@@ -261,13 +241,9 @@
             const currentPlan = plans[selectedPlanKey] || plans[defaultPlanKey];
 
             const checkoutForm = document.getElementById('checkout-form');
-            const pixContainer = document.getElementById('pix-container');
             const submitButton = document.getElementById('submit-button');
             const buttonText = document.getElementById('button-text');
             const loadingSpinner = document.getElementById('loading-spinner');
-            const pixQrcode = document.getElementById('pix-qrcode');
-            const pixCopyPaste = document.getElementById('pix-copy-paste');
-            const copyButton = document.getElementById('copy-button');
             const timerDisplay = document.getElementById('timer');
             const timerBar = document.getElementById('timer-bar');
             const summaryProductName = document.getElementById('summary-product-name');
@@ -291,31 +267,24 @@
                 }
             }
             
-            // **** INÍCIO DA CORREÇÃO ****
+            // **** INÍCIO DA MODIFICAÇÃO ****
             function displayPixInfo({ qrcodeBase64, pixCopiaECola }) {
-                pixQrcode.src = `data:image/png;base64,${qrcodeBase64}`;
-                pixCopyPaste.value = pixCopiaECola;
-
-                // CORREÇÃO: Esconde os elementos individuais, não o container-pai
-                const orderSummaryCard = document.querySelector('#checkout-content > .card:first-child');
-                if (orderSummaryCard) {
-                    orderSummaryCard.classList.add('hidden'); // Esconde o Resumo do Pedido
-                }
-                document.getElementById('checkout-form').classList.add('hidden'); // Esconde o Formulário
+                // Constrói a URL da página de obrigado com os parâmetros do PIX
+                const thankYouUrl = new URL('obrigado.html', window.location.origin);
+                thankYouUrl.searchParams.append('qr_code', encodeURIComponent(qrcodeBase64));
+                thankYouUrl.searchParams.append('pix_copy', encodeURIComponent(pixCopiaECola));
                 
-                // Mostra a área do PIX
-                pixContainer.classList.remove('hidden');
-                
-                pixContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                // Redireciona o usuário
+                window.location.href = thankYouUrl.toString();
             }
-            // **** FIM DA CORREÇÃO ****
+            // **** FIM DA MODIFICAÇÃO ****
 
             checkoutForm.addEventListener('submit', async (e) => {
                 e.preventDefault();
 
                 const email = document.getElementById('email').value;
                 if (!email || !/^\S+@\S+\.\S+$/.test(email)) {
-                    alert('Por favor, insira um e-mail válido.');
+                    alert('Por favor, insira um e--mail válido.');
                     return;
                 }
                 
@@ -348,15 +317,6 @@
                 } finally {
                     setLoading(false);
                 }
-            });
-
-            copyButton.addEventListener('click', () => {
-                navigator.clipboard.writeText(pixCopyPaste.value).then(() => {
-                    copyButton.innerHTML = '<i class="fas fa-check" style="margin-right: 0.5rem;"></i> Copiado!';
-                    setTimeout(() => {
-                        copyButton.innerHTML = '<i class="fas fa-copy" style="margin-right: 0.5rem;"></i> Copiar Código PIX';
-                    }, 2000);
-                });
             });
             
             let timeInSeconds = 15 * 60;
