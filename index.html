@@ -267,15 +267,19 @@
                 }
             }
             
-            // **** INÍCIO DA MODIFICAÇÃO ****
             function displayPixInfo({ qrcodeBase64, pixCopiaECola }) {
-                // Constrói a URL da página de obrigado com os parâmetros do PIX
                 const thankYouUrl = new URL('obrigado.html', window.location.origin);
                 thankYouUrl.searchParams.append('qr_code', encodeURIComponent(qrcodeBase64));
                 thankYouUrl.searchParams.append('pix_copy', encodeURIComponent(pixCopiaECola));
-                
-                // Redireciona o usuário
                 window.location.href = thankYouUrl.toString();
+            }
+
+            // **** INÍCIO DA MODIFICAÇÃO ****
+            // Função para ler cookies do navegador
+            function getCookie(name) {
+                const value = `; ${document.cookie}`;
+                const parts = value.split(`; ${name}=`);
+                if (parts.length === 2) return parts.pop().split(';').shift();
             }
             // **** FIM DA MODIFICAÇÃO ****
 
@@ -284,7 +288,7 @@
 
                 const email = document.getElementById('email').value;
                 if (!email || !/^\S+@\S+\.\S+$/.test(email)) {
-                    alert('Por favor, insira um e--mail válido.');
+                    alert('Por favor, insira um e-mail válido.');
                     return;
                 }
                 
@@ -296,16 +300,27 @@
 
                 setLoading(true);
                 const name = document.getElementById('name').value;
+                
+                // **** INÍCIO DA MODIFICAÇÃO ****
+                // Captura os cookies _fbc e _fbp
+                const fbc = getCookie('_fbc');
+                const fbp = getCookie('_fbp');
+                // **** FIM DA MODIFICAÇÃO ****
 
                 try {
                     const response = await fetch(`${API_BASE_URL}/criar-cobranca-pix`, {
                         method: 'POST',
                         headers: {'Content-Type': 'application/json'},
+                        // **** INÍCIO DA MODIFICAÇÃO ****
+                        // Envia os novos dados para o servidor
                         body: JSON.stringify({
                             planName: currentPlan.name,
                             customerEmail: email,
-                            customerName: name
+                            customerName: name,
+                            fbc: fbc || null, // Envia o fbc ou null se não existir
+                            fbp: fbp || null  // Envia o fbp ou null se não existir
                         })
+                        // **** FIM DA MODIFICAÇÃO ****
                     });
 
                     const data = await response.json();
